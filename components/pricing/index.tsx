@@ -1,8 +1,8 @@
 // import { Button } from "@/components/ui/button"
 
-export default function Component() {
+export default function Pricing() {
   return (
-    <section className="min-h-screen w-full py-12 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-zinc-900 dark:to-zinc-800 flex items-center justify-center">
+    <section className="w-full flex items-center justify-center">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
           <div className="flex flex-col p-6 bg-white shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
