@@ -6,20 +6,48 @@ moncash.configure({
     'client_secret': process.env.MONCASH_CLIENT_SECRET, 
 })
 
-export { moncash }
+export const createSession = async (
+    amount: number,
+    orderId: string,
+  ): Promise<{ url: string; message: string }> => {
+    return new Promise((resolve, reject) => {
+      const creator = moncash.payment;
 
-export const getPaymentByTransactionId = (transactionId: string) => {
-    moncash.capture.getByTransactionId(transactionId, function (error, capture) {
-        if (error) {
-            console.error(error);
+      const handleCreatePayment = (err: any, payment: any) => {
+        if (err) {
+          console.log(err);
+          reject(err);
         } else {
-            console.log(capture);
+          const redirectUri = creator.redirect_uri(payment) as string;
+          resolve({ url: redirectUri, message: 'Moncash Payment type' });
         }
+      };
+
+      creator.create({ amount, orderId }, handleCreatePayment);
     });
+  }
+
+export const getPaymentByTransactionId = async (transactionId: string): Promise<{ referenceId: string }> => {
+    return new Promise((resolve, reject) => {
+        moncash.capture.getByTransactionId(transactionId, function (error: any, capture: any) {
+            if (error) {            
+                reject(error)
+                return
+            } else {
+                if(capture){
+                    if(capture.payment.message === 'successful') {
+                        resolve({ referenceId: capture.payment.reference })
+                    }
+                }
+                reject({ msg: "Capture dont't exist" })
+            }
+        });
+    });
+    
 }
 
 export const getPaymentByOrderId = (orderId: string) => {
-    moncash.capture.getByOrderId(orderId, function (error, capture) {
+    moncash.capture.getByOrderId(orderId, function (error: any, capture: any) {
         if (error) {
             console.error(error);
         } else {
@@ -28,3 +56,6 @@ export const getPaymentByOrderId = (orderId: string) => {
     });
 }
 
+
+
+export { moncash }
