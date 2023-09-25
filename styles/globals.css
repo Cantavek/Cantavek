@@ -80,3 +80,17 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500;
   }
 }
+
+.bard .intro {
+	font-size: 1.25rem;
+	line-height: 2rem;
+	margin-bottom: 2.5rem
+}
+
+.bard .intro:first-child:first-letter {
+	float: left;
+	font-size: 4.5rem;
+	font-weight: 700;
+	line-height: 4rem;
+	margin-right: .5rem
+}
