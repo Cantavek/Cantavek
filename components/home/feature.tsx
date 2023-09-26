@@ -12,6 +12,7 @@ const Feature = () => {
           <img
             src="/text-e1683216320973.png"
             alt="image"
+            className="object-contain"
             loading="lazy"
             width=""
             height=""

@@ -1,99 +1,84 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { 
+  DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, 
+  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import { DashboardIcon, PersonIcon } from "@radix-ui/react-icons"
+import { DashboardIcon, EnterIcon, PersonIcon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const Navbar = () => {
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  <Link href="/" className="flex items-center">
-      <img src="/logo.png" className="h-8 mr-3" alt="Cantavek Logo"/>
-  </Link>
-  <div className="flex md:order-2 space-x-3 items-center">
-      <Button size={'lg'} asChild
-      className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl shadow-lg shadow-purple-500/50">
-        <Link href={'/follow'}>
-          Follow
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <Link href="/" className="flex items-center">
+            <img src="/logo.png" className="h-8 mr-3" alt="Cantavek Logo"/>
         </Link>
-      </Button>
+      <div className="flex md:order-2 space-x-3 items-center">
+        <Button size={'lg'} asChild
+        className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl shadow-lg shadow-purple-500/50">
+          <Link href={'/follow'}>
+            Follow
+          </Link>
+        </Button>
 
       <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="relative rounded-full p-0 h-full"
-              >
-                <Avatar className="h-10 w-10">
-                  {/* <AvatarImage
-                    src={"https://github.com/shdcn.png"}
-                    alt={"profile photo"}
-                    className="rounded-full"
-                  /> */}
-                  <AvatarFallback>OL</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 rounded-lg" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Oliver Jean Baptiste
-                  </p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    oliver@gmail.com
-                  </p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard/account">
-                    <PersonIcon
-                      className="mr-2 h-4 w-4"
-                      aria-hidden="true"
-                    />
-                    Account
-                    <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard/stores">
-                    <DashboardIcon
-                      className="mr-2 h-4 w-4"
-                      aria-hidden="true"
-                    />
-                    Dashboard
-                    <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild disabled>
-                  <Link href="/dashboard/settings">
-                    {/* <CogIcons
-                      className="mr-2 h-4 w-4"
-                      aria-hidden="true"
-                    /> */}
-                    Settings
-                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            className="relative rounded-full p-0 h-full"
+          >
+            <Avatar className="h-10 w-10">
+              <AvatarFallback>OL</AvatarFallback>
+            </Avatar>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56 rounded-lg" align="end" forceMount>
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col space-y-1">
+              <p className="text-sm font-medium leading-none">
+                Oliver Jean Baptiste
+              </p>
+              <p className="text-xs leading-none text-muted-foreground">
+                oliver@gmail.com
+              </p>
+            </div>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+            <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/signout">
-                  {/* <Icons.logout
+                <Link href="/dashboard/account">
+                  <PersonIcon
                     className="mr-2 h-4 w-4"
                     aria-hidden="true"
-                  /> */}
-                  Log out
-                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                  />
+                  Account
                 </Link>
               </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-  </div>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/stores">
+                  <DashboardIcon
+                    className="mr-2 h-4 w-4"
+                    aria-hidden="true"
+                  />
+                  Dashboard
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/signout">
+                <EnterIcon
+                className="mr-2 h-4 w-4"
+                aria-hidden="true"
+                />
+                Log in
+              </Link>
+            </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
   {/* <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
@@ -110,8 +95,8 @@ const Navbar = () => {
       </li>
     </ul>
   </div> */}
-  </div>
-</nav>
+      </div>
+    </nav>
   )
 }
 

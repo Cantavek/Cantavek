@@ -1,6 +1,9 @@
+import { useState } from "react";
 import PricingCard from "./pricing-card";
 
 export default function Pricing() {
+  const [bundleSelected, setSelectedBundle] = useState<'basic' | 'pro' | 'entreprise'>('pro')
+
   return (
     <section className="w-full flex items-center justify-center">
       <div className="container px-4 md:px-6">
@@ -13,6 +16,8 @@ export default function Pricing() {
             '2GB Cloud Storage',
             'Basic Video Templates'
           ]}
+          selected={bundleSelected === 'basic'}
+          onClick={() => setSelectedBundle('basic')}
           />
           
           <PricingCard
@@ -24,7 +29,8 @@ export default function Pricing() {
             'Premium Video Templates',
             'Collaboration Tools'
           ]}
-          selected
+          onClick={() => setSelectedBundle('pro')}
+          selected={bundleSelected === 'pro'}
           popular
           />
           
@@ -38,6 +44,8 @@ export default function Pricing() {
             'Advanced Collaboration Tools',
             'Dedicated Support'
           ]}
+          selected={bundleSelected === 'entreprise'}
+          onClick={() => setSelectedBundle('entreprise')}
           />
         </div>
       </div>

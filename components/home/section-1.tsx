@@ -14,12 +14,12 @@ const Section1 = () => {
           CANTAVE K COMEDY CLUB
           </h2>
         </div>
-        <div className="align-top relative overflow-hidden flex items-center justify-center">
+        <div className="align-top relative overflow-hidden flex items-center justify-center rounded-2xl">
           <BlurImage
             width={550}
-            height={650}
+            height={380}
             src="/Cantekcomedyclub_93-min_50-scaled.jpg"
-            className="object-contain rounded-xl"
+            className="object-contain rounded-2xl"
             alt=""
           />
         </div>
