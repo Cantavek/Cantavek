@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Button } from '../ui/button'
-import Image from 'next/image'
+import BlurImage from '../blur-image'
 
 const Section2 = () => {
   return (
@@ -8,7 +8,7 @@ const Section2 = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-10 flex-wrap-reverse">
         <div className="order-2 md:order-1">
           <h2 className="mb-6 font-normal text-2xl md:text-4xl leading-tight hidden md:block">
-          Lancement de la première édition FOLLOW CANTAVE.K
+            Lancement de la première édition FOLLOW CANTAVE.K
           </h2>
           <div style={{ color: 'rgb(35, 36, 38)' }} className="text-lg">
             <p>
@@ -40,7 +40,7 @@ const Section2 = () => {
             </h2>
           </div>
           <div className="align-top relative overflow-hidden flex items-center justify-center">
-            <Image
+            <BlurImage
               width={550}
               height={650}
               src="/75D32E30-23AF-4ACD-8AEF-9A2CCED70C3D.jpeg"

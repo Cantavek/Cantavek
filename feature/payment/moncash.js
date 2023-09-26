@@ -1,4 +1,4 @@
-import moncash from "nodejs-moncash-sdk";
+const moncash = require('nodejs-moncash-sdk');
 
 moncash.configure({
     'mode': process.env.NODE_ENV === 'production' ? 'live' : 'sandbox',
@@ -6,30 +6,26 @@ moncash.configure({
     'client_secret': process.env.MONCASH_CLIENT_SECRET, 
 })
 
-export const createSession = async (
-    amount: number,
-    orderId: string,
-  ): Promise<{ url: string; message: string }> => {
+export const createMoncashSession = async (amount, orderId) => {
     return new Promise((resolve, reject) => {
       const creator = moncash.payment;
 
-      const handleCreatePayment = (err: any, payment: any) => {
+      const handleCreatePayment = (err, payment) => {
         if (err) {
           console.log(err);
           reject(err);
         } else {
-          const redirectUri = creator.redirect_uri(payment) as string;
+          const redirectUri = creator.redirect_uri(payment);
           resolve({ url: redirectUri, message: 'Moncash Payment type' });
         }
       };
-
       creator.create({ amount, orderId }, handleCreatePayment);
     });
   }
 
-export const getPaymentByTransactionId = async (transactionId: string): Promise<{ referenceId: string }> => {
+export const getPaymentByTransactionId = async (transactionId) => {
     return new Promise((resolve, reject) => {
-        moncash.capture.getByTransactionId(transactionId, function (error: any, capture: any) {
+        moncash.capture.getByTransactionId(transactionId, function (error, capture) {
             if (error) {            
                 reject(error)
                 return
@@ -46,8 +42,8 @@ export const getPaymentByTransactionId = async (transactionId: string): Promise<
     
 }
 
-export const getPaymentByOrderId = (orderId: string) => {
-    moncash.capture.getByOrderId(orderId, function (error: any, capture: any) {
+export const getPaymentByOrderId = (orderId) => {
+    moncash.capture.getByOrderId(orderId, function (error, capture) {
         if (error) {
             console.error(error);
         } else {

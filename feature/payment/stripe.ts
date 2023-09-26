@@ -5,7 +5,7 @@ const stripe = new Stripe(
   { apiVersion: '2023-08-16' }
 );
 
-export const createSession = async (items: any, client_reference_id: string) => {
+export const createStripeSession = async (items: any, client_reference_id: string) => {
   const products = items.products.map((p: any) => {
     return {
       price_data: {

@@ -3,8 +3,7 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { DashboardIcon, PersonIcon } from "@radix-ui/react-icons"
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
-import { AvatarFallback } from '@radix-ui/react-avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const Navbar = () => {
   return (
@@ -28,11 +27,11 @@ const Navbar = () => {
                 className="relative rounded-full p-0 h-full"
               >
                 <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    src={"https://github.com/shadcn.png"}
-                    alt={""}
+                  {/* <AvatarImage
+                    src={"https://github.com/shdcn.png"}
+                    alt={"profile photo"}
                     className="rounded-full"
-                  />
+                  /> */}
                   <AvatarFallback>OL</AvatarFallback>
                 </Avatar>
               </Button>

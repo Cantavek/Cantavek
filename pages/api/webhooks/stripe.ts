@@ -23,7 +23,8 @@ export default async function handler(
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY as string;
     const sig = req.headers['stripe-signature'] as string;
     let event: Stripe.Event
-    const buff = await buffer(req);
+    // const buff = await buffer(req);
+    const buff = '';
     
     try {
       event = stripe.webhooks.constructEvent(buff, sig, endpointSecret);

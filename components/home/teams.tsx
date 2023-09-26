@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import React from 'react'
 
 const Teams = () => {
   return (
