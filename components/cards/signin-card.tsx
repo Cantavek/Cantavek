@@ -1,15 +1,15 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
-import SignUpForm from '../forms/signup-form'
 import Link from 'next/link'
+import SignInForm from '../forms/signin-form'
 
-const SignInCard = () => {
+const SignInCard = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
   return ( 
     <Card>
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Sign in</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <SignUpForm />
+        <SignInForm handleSubmit={handleSubmit} />
       </CardContent>
       <CardFooter className="flex flex-wrap items-center space-x-2">
         <div className="flex-1 text-sm text-muted-foreground">

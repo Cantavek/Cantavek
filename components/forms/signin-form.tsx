@@ -18,11 +18,14 @@ import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
 import { useRouter } from "next/router";
 import { authSchema } from "@/validations/auth";
+import { useState } from "react";
+import Spinner from "../svgs/spinner";
 
 type Inputs = z.infer<typeof authSchema>
 
-const SignUpForm = () => {
+const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
   // react-hook-form
   const form = useForm<Inputs>({
@@ -33,17 +36,25 @@ const SignUpForm = () => {
     },
   })
 
-  // function onSubmit(data: Inputs) {
-        
-  // }
+
+  function onSubmit(data: Inputs) {
+      console.log(data, 'data')
+      setLoading(true)
+      const t = setTimeout(() => {
+        setLoading(false)
+        handleSubmit('pay')
+        clearTimeout(t)
+      }, 5000)
+  }
 
   return (
     <Form {...form}>
       <form
         className="grid gap-4"
+        onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
         <FormField
-          // control={form.control}
+          control={form.control}
           name="email"
           render={({ field }) => (
             <FormItem>
@@ -56,7 +67,7 @@ const SignUpForm = () => {
           )}
         />
         <FormField
-          // control={form.control}
+          control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
@@ -68,13 +79,13 @@ const SignUpForm = () => {
             </FormItem>
           )}
         />
-        <Button disabled={false}>
-          {/* {false && (
-            <Icons.spinner
+        <Button disabled={loading} >
+          {loading && (
+            <Spinner
               className="mr-2 h-4 w-4 animate-spin"
               aria-hidden="true"
             />
-          )} */}
+          )}
           Continue
           <span className="sr-only">Continue to email verification page</span>
         </Button>
@@ -83,4 +94,4 @@ const SignUpForm = () => {
   )
 }
 
-export default SignUpForm
+export default SignInForm
