@@ -36,3 +36,9 @@ export const resetPasswordSchema = z
     path: ["confirmPassword"],
   })
   
+export const paymentSchema = z.object({
+  bundle: z.string(),
+  payment_type: z.enum(['moncash', 'stripe']),
+})
+
+  

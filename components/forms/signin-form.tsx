@@ -2,8 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form";
 import type { z } from "zod"
-
-// import { authSchema } from "@/lib/validations/auth"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -14,7 +12,6 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-// import { Icons } from "@/components/icons"
 import { PasswordInput } from "@/components/password-input"
 import { useRouter } from "next/router";
 import { authSchema } from "@/validations/auth";
@@ -44,7 +41,7 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
         setLoading(false)
         handleSubmit('pay')
         clearTimeout(t)
-      }, 5000)
+      }, 2000)
   }
 
   return (

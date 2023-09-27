@@ -26,7 +26,7 @@ export const createStripeSession = async (items: any, client_reference_id: strin
     success_url: `${process.env.APP_URL}/orders/thanks?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.APP_URL}/checkout`,
   });
-  return session.url;
+  return session;
 }
 
 export const retreiveSession = async (sessionId: string) => {

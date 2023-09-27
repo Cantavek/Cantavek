@@ -13,7 +13,7 @@ interface Props{
 
 const PricingCard = ({ name, price, accesses, onClick, selected = false, popular = false }: Props) => {
   return (
-    <button onClick={onClick} className={cn("relative flex flex-col p-6 bg-white shadow-lg rounded-lg dark:bg-zinc-850 justify-between border", { "border-purple-500": selected })}>
+    <div onClick={onClick} className={cn("relative flex flex-col p-6 bg-white shadow-lg rounded-lg dark:bg-zinc-850 justify-between border", { "border-purple-500": selected })}>
       {popular && <div className="px-3 py-1 text-sm text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full inline-block absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         Popular
       </div>}
@@ -39,7 +39,7 @@ const PricingCard = ({ name, price, accesses, onClick, selected = false, popular
           Get Started
         </Button>
       </div>
-    </button>
+    </div>
   )
 }
 
