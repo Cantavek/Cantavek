@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Navbar/>
       <main className="flex-1 relative">
         {children}
-        <Button className='bg-main rounded-full fixed bottom-10 md:bottom-16 p-4 h-auto right-4' asChild>
+        <Button className='bg-main rounded-full fixed bottom-10 md:bottom-16 p-4 h-auto right-4 z-40' asChild>
           <Link href={'/videos'}>
             <VideoIcon width={24} height={24}/>
           </Link>
