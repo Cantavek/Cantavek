@@ -9,8 +9,8 @@ export default function Pricing() {
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
           <PricingCard
-          name="Basic"
-          price="$29"
+          name="Fan"
+          price="$10"
           accesses={[
             '720p Video Rendering',
             '2GB Cloud Storage',
@@ -18,11 +18,12 @@ export default function Pricing() {
           ]}
           selected={bundleSelected === 'basic'}
           onClick={() => setSelectedBundle('basic')}
+          link="/follow/buy?bundle=fan"
           />
           
           <PricingCard
-          name="Pro"
-          price="$59"
+          name="Super fan"
+          price="$15"
           accesses={[
             '1080p Video Rendering',
             '10GB Cloud Storage',
@@ -32,11 +33,12 @@ export default function Pricing() {
           onClick={() => setSelectedBundle('pro')}
           selected={bundleSelected === 'pro'}
           popular
+          link="/follow/buy?bundle=super-fan"
           />
           
           <PricingCard
-          name="Enterprise"
-          price="$99"
+          name="Mega fan"
+          price="$25"
           accesses={[
             '4K Video Rendering',
             'Unlimited Cloud Storage',
@@ -46,6 +48,7 @@ export default function Pricing() {
           ]}
           selected={bundleSelected === 'entreprise'}
           onClick={() => setSelectedBundle('entreprise')}
+          link="/follow/buy?bundle=mega-fan"
           />
         </div>
       </div>

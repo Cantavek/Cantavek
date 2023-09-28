@@ -2,16 +2,24 @@ import { ReactNode } from 'react'
 import Navbar from './navbar'
 import { Inter } from 'next/font/google'
 import Footer from './footer'
+import { Button } from '@/components/ui/button'
+import { VideoIcon } from '@radix-ui/react-icons'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className={`relative flex min-h-screen flex-col ${inter.className}`}>
-      {/* <SiteHeader/> */}
       <Navbar/>
-      <main className="flex-1">{children}</main>
-      {/* <SiteFooter /> */}
+      <main className="flex-1 relative">
+        {children}
+        <Button className='bg-main rounded-full fixed bottom-10 md:bottom-16 p-4 h-auto right-4' asChild>
+          <Link href={'/videos'}>
+            <VideoIcon width={24} height={24}/>
+          </Link>
+        </Button>
+      </main>
       <Footer/>
     </div>
   )

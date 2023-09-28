@@ -3,14 +3,11 @@ import SignInCard from '@/components/cards/signin-card'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { ReactNode, useState } from 'react'
 
 export type Section = 'login' | 'register' | 'pay';
 
 const Buy = ({ children }: { children: ReactNode }) => {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
   const [section, setSection] = useState<Section>('login')
 
   const handleChangeSection = (section: Section) => setSection(section)

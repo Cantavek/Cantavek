@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { CheckIcon } from '@radix-ui/react-icons'
 import { Button } from '../ui/button'
+import Link from 'next/link'
 
 interface Props{
   name: string
@@ -9,9 +10,10 @@ interface Props{
   selected?: boolean
   popular?: boolean
   onClick: () => void
+  link: string
 }
 
-const PricingCard = ({ name, price, accesses, onClick, selected = false, popular = false }: Props) => {
+const PricingCard = ({ name, price, accesses, onClick, link, selected = false, popular = false }: Props) => {
   return (
     <div onClick={onClick} className={cn("relative flex flex-col p-6 bg-white shadow-lg rounded-lg dark:bg-zinc-850 justify-between border", { "border-purple-500": selected })}>
       {popular && <div className="px-3 py-1 text-sm text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full inline-block absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -24,19 +26,21 @@ const PricingCard = ({ name, price, accesses, onClick, selected = false, popular
         </div>
         <ul className="my-7 space-y-2">
           {accesses.map((access, i) => (
-            <li className="flex items-center" key={i}>
-              <div className='bg-main rounded-full mr-2 p-1'>
-                <CheckIcon className='text-white'/>
-              </div>
-              {access}
+            <li className="flex items-center space-x-1" key={i}>
+              <CheckIcon className='text-pink-500' width={24} height={24}/>
+              <span>{access}</span>
             </li>
           ))}
       
         </ul>
       </div>
       <div className="mt-6 w-full">
-        <Button className={cn("w-full", { "bg-gradient-to-r from-pink-500 to-purple-500": selected })}>
-          Get Started
+        <Button 
+        asChild
+        className={cn("w-full", { "bg-gradient-to-r from-pink-500 to-purple-500": selected })}>
+          <Link href={link}>
+            Get Started
+          </Link>
         </Button>
       </div>
     </div>

@@ -11,29 +11,39 @@ import { useState } from 'react'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import Spinner from '../svgs/spinner'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
+import { useRouter } from 'next/router'
 
 type Inputs = z.infer<typeof paymentSchema>
 
 const PaymentForm = () => {
+  const defaultBundle = (useRouter().query?.bundle as string) || 'super-fan'
   const [loading, setLoading] = useState(false)
 
   const form = useForm<Inputs>({
     resolver: zodResolver(paymentSchema),
     defaultValues: {
-      bundle: "super-fan",
+      bundle: defaultBundle,
       payment_type: "moncash",
     },
   })
 
 
-  function onSubmit(data: Inputs) {
+  async function onSubmit(data: Inputs) {
       console.log(data, 'data')
       setLoading(true)
-      const t = setTimeout(() => {
+      try{
+        const res = await fetch(`/api/pay/${data.payment_type}`,{
+          method: 'POST',
+          body: JSON.stringify({ bundle: data.bundle })
+        })
+        const payemtResponse: {url?: string, message: string, error: boolean} = await res.json()
+        if(payemtResponse.error === false && payemtResponse.url) {
+          window.location.href = payemtResponse.url
+        }
+      }catch(e){
+        console.log(e, 'error')
         setLoading(false)
-        // handleSubmit('pay')
-        clearTimeout(t)
-      }, 2000)
+      }
   }
 
   return (

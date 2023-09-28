@@ -34,16 +34,16 @@ const Teams = () => {
               {/* <span className="block text-sm text-gray-500">fredjylouis@cantavek.com</span> */}
             </div>
             <div className="flex justify-center space-x-4 text-gray-500">
-            <a href="#" target="_blank" aria-label="instagram">
-              <InstagramLogoIcon width={24} height={24}/>
-            </a>
-            <a href="#" target="_blank" aria-label="instagram">
-              <TwitterLogoIcon width={24} height={24}/>
-            </a>
-            <a href="#" target="_blank" aria-label="instagram">
-              <LinkedInLogoIcon width={24} height={24}/>
-            </a>
-          </div>
+              <a href="#" target="_blank" aria-label="instagram">
+                <InstagramLogoIcon width={24} height={24}/>
+              </a>
+              <a href="#" target="_blank" aria-label="instagram">
+                <TwitterLogoIcon width={24} height={24}/>
+              </a>
+              <a href="#" target="_blank" aria-label="instagram">
+                <LinkedInLogoIcon width={24} height={24}/>
+              </a>
+            </div>
           </div>
         </div>
   

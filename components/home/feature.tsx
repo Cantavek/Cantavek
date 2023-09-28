@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-
 import { SpeakerLoudIcon, VideoIcon } from "@radix-ui/react-icons"
 
 const Feature = () => {
@@ -10,12 +9,12 @@ const Feature = () => {
       <div className="lg:bg-gray-50 dark:lg:bg-darker lg:p-16 rounded-[4rem] space-y-6 md:flex flex-row-reverse md:gap-6 justify-center md:space-y-0 lg:items-center">
         <div className="flex justify-center">
           <img
-            src="/text-e1683216320973.png"
+            src="/IMG_5983.jpg"
             alt="image"
-            className="object-contain"
+            className="object-contain rounded-xl"
             loading="lazy"
-            width=""
-            height=""
+            width="350"
+            height="300"
           />
         </div>
         <div className="md:7/12 lg:w-1/2">
