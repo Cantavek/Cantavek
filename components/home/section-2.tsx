@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import BlurImage from '../blur-image'
+import { VideoIcon } from '@radix-ui/react-icons'
 
 const Section2 = () => {
   return (
@@ -27,8 +28,11 @@ const Section2 = () => {
               </ul>
             </div> */}
             <div className="mt-6">
-              <Button  className="!rounded-3xl bg-main" asChild>
-                <Link href={'/follow'}>Follow</Link>
+              <Button size={'lg'} className="bg-main rounded-xl shadow-lg shadow-purple-500/50" asChild>
+                <Link href={'/videos'}>
+                  <VideoIcon width={20} height={20} strokeWidth={2} className='mr-2'/>
+                  See content
+                </Link>
               </Button>
             </div>
           </div>

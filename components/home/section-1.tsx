@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import BlurImage from '../blur-image'
+import { HeartIcon } from '@radix-ui/react-icons'
 
 const Section1 = () => {
   return (
@@ -44,8 +45,14 @@ const Section1 = () => {
             </ul>
           </div> */}
           <div className="mt-6">
-            <Button  className="!rounded-3xl bg-main" asChild>
-              <Link href={'/follow'}>Follow</Link>
+            <Button
+            size={'lg'}
+            className="bg-main rounded-xl shadow-lg shadow-purple-500/50" 
+            asChild>
+              <Link href={'/follow'}>
+                <HeartIcon width={20} height={20} strokeWidth={2} className='mr-2'/>
+                Follow
+              </Link>
             </Button>
           </div>
         </div>

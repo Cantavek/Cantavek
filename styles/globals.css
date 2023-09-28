@@ -94,3 +94,17 @@
 	line-height: 4rem;
 	margin-right: .5rem
 }
+
+vm-player {
+  --vm-player-theme: #e86c8b;
+  
+}
+vm-player[video]{
+  padding-bottom: 70%;
+}
+vm-player .player.video{
+  padding-bottom: 70%;
+}
+vm-player[idle]{
+  padding-bottom: 74%;
+}

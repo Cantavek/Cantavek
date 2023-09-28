@@ -1,31 +1,26 @@
-import { Player, Video, DefaultUi } from '@vime/react';
+import { Player, Video, DefaultUi, Skeleton, ViewType } from '@vime/react';
 import '@vime/core/themes/default.css';
+import { useScreenDetector } from '@/lib/useScreenDetector';
 
 const VideoPlayer = () => {
-  return (
-    <Player
-    theme="dark"
-    style={{ '--vm-player-theme': '#e86c8b' }}
-  >
-    <Video
-      crossOrigin={'anonymous'}
-      poster="https://media.vimejs.com/poster.png"
-    >
-      <source 
-        data-src="https://media.vimejs.com/720p.mp4" 
-        type="video/mp4"
-      />
-      <track 
-        default 
-        kind="subtitles" 
-        src="https://media.vimejs.com/subs/english.vtt" 
-        srcLang="en" 
-        label="English" 
-      />
-    </Video>
+  const { isMobile } = useScreenDetector()
 
-    <DefaultUi />
-  </Player>
+  return (
+    <Player theme="dark" viewType={ViewType.Video} aspectRatio={isMobile ? '16:15' : '16:10'}>
+      <Video
+        crossOrigin={''}
+        poster="/kal-visuals-V1b1YDaesD4-unsplash.jpg"
+      >
+        <source 
+          data-src="/video.mp4" 
+          type="video/mp4"
+        />
+      </Video>
+
+      <DefaultUi noCaptions>
+        <Skeleton />
+      </DefaultUi>   
+    </Player>
   )
 }
 

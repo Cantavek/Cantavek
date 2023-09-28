@@ -5,21 +5,22 @@ import {
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import { DashboardIcon, EnterIcon, PersonIcon } from "@radix-ui/react-icons"
+import { DashboardIcon, EnterIcon, HeartIcon, PersonIcon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const Navbar = () => {
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+    <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-gray-200 dark:border-gray-600 z-[200]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
             <img src="/logo.png" className="h-8 mr-3" alt="Cantavek Logo"/>
         </Link>
       <div className="flex md:order-2 space-x-3 items-center">
         <Button size={'lg'} asChild
-        className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl shadow-lg shadow-purple-500/50">
+        className="bg-main rounded-xl shadow-lg shadow-purple-500/50">
           <Link href={'/follow'}>
-            Follow
+            <HeartIcon width={20} height={20} strokeWidth={2} className='mr-2'/>
+              Follow
           </Link>
         </Button>
 
