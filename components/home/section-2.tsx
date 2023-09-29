@@ -5,7 +5,7 @@ import { VideoIcon } from '@radix-ui/react-icons'
 
 const Section2 = () => {
   return (
-    <div className="py-12 bg-white" style={{ color: 'rgb(35, 36, 38)' }}>
+    <div className="py-12 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-10 flex-wrap-reverse">
         <div className="order-2 md:order-1">
           <h2 className="mb-6 font-normal text-2xl md:text-4xl leading-tight hidden md:block">

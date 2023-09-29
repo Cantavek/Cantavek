@@ -11,7 +11,7 @@ interface Props {
   duration: string
 }
 
-const VideoCard = ({ poster, title, id, lock, duration }: Props) => {
+const VideoCard = ({ poster, title, id, lock = true, duration }: Props) => {
   return (
     <div>
       <div>
@@ -23,11 +23,11 @@ const VideoCard = ({ poster, title, id, lock, duration }: Props) => {
           alt={``}
           className="w-full h-full object-cover bg-skeleton rounded"
           />
-          <div className='absolute top-4 right-2.5'>
+          {lock && <div className='absolute top-4 right-2.5'>
             <Button className='text-xs bg-main p-2 shadow-md h-auto rounded-full'>
               <LockClosedIcon strokeWidth={3}/>
             </Button>
-          </div>
+          </div>}
           <div className='absolute bottom-3 right-2.5 bg-foreground text-background px-1.5 py-0.5 rounded text-sm'>
             <span>{duration}</span>
           </div>

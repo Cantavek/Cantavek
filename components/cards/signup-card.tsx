@@ -1,23 +1,23 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card'
-import SignInForm from '../forms/signin-form'
+import SignUpForm from '../forms/signup-form'
 
-const SignInCard = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
+const SignUpCard = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
   return ( 
     <Card>
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Sign in</CardTitle>
+        <CardTitle className="text-2xl">Sign up</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <SignInForm handleSubmit={handleSubmit} />
+        <SignUpForm handleSubmit={handleSubmit} />
       </CardContent>
       <CardFooter className="flex flex-wrap items-center space-x-2">
-        <div className="flex-1 text-sm text-muted-foreground" onClick={() => handleSubmit('register')}>
-          Don&apos;t have an account?{" "}
+        <div className="flex-1 text-sm text-muted-foreground" onClick={() => handleSubmit('login')}>
+          Already have an account?{" "}
           <span
-            aria-label="Sign up"
+            aria-label="Sign in"
             className="text-primary underline-offset-4 transition-colors hover:underline cursor-pointer"
           >
-            Sign up
+            Sign in
           </span>
         </div>
       </CardFooter>
@@ -25,4 +25,4 @@ const SignInCard = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
   )
 }
 
-export default SignInCard
+export default SignUpCard

@@ -1,19 +1,19 @@
-/* eslint-disable @next/next/no-img-element */
 import { Button } from '@/components/ui/button'
 import { 
   DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, 
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import { DashboardIcon, EnterIcon, HeartIcon, PersonIcon } from "@radix-ui/react-icons"
+import { EnterIcon, HeartIcon, PersonIcon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import Image from 'next/image';
 
 const Navbar = () => {
   return (
-    <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-gray-200 dark:border-gray-600 z-[200]">
+    <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-gray-200 dark:border-gray-600 z-50">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
-            <img src="/logo.png" className="h-8 mr-3" alt="Cantavek Logo"/>
+            <Image width={94} height={32} src="/logo.png" className="h-8 mr-3" alt="Cantavek Logo"/>
         </Link>
       <div className="flex md:order-2 space-x-3 items-center">
         <Button size={'lg'} asChild
@@ -55,15 +55,6 @@ const Navbar = () => {
                     aria-hidden="true"
                   />
                   Account
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/stores">
-                  <DashboardIcon
-                    className="mr-2 h-4 w-4"
-                    aria-hidden="true"
-                  />
-                  Dashboard
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>

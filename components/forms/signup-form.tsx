@@ -14,20 +14,21 @@ import {
 import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
 import { useRouter } from "next/router";
-import { signInSchema } from "@/validations/auth";
+import { signUpSchema } from "@/validations/auth";
 import { useState } from "react";
 import Spinner from "../svgs/spinner";
 
-type Inputs = z.infer<typeof signInSchema>
+type Inputs = z.infer<typeof signUpSchema>
 
-const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
+const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
   // react-hook-form
   const form = useForm<Inputs>({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      username: '',
       email: "",
       password: "",
     },
@@ -50,6 +51,20 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
         className="grid gap-4"
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Username" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
@@ -91,4 +106,4 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
   )
 }
 
-export default SignInForm
+export default SignUpForm

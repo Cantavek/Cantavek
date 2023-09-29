@@ -115,7 +115,8 @@ const PaymentForm = () => {
                     <Button
                       aria-label={`Pay with moncash`}
                       variant="outline"
-                      className="w-full bg-background flex-1 justify-between"
+                      className="w-full bg-background flex-1 justify-between cursor-pointer"
+                      size={'lg'}
                       asChild
                     >
                       <div>
@@ -136,8 +137,9 @@ const PaymentForm = () => {
                     <Button
                       aria-label={`Pay with credit card`}
                       variant="outline"
-                      className="w-full bg-background flex-1 justify-between"
+                      className="w-full bg-background flex-1 justify-between cursor-pointer"
                       asChild
+                      size={'lg'}
                     >
                       <div>
                         <div className='flex items-center'>

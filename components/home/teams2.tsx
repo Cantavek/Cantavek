@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import React from 'react'
 
 const Teams2 = () => {
   return (
     
     <div className="bg-gray-50 dark:bg-gray-800 py-20">
     <div className="xl:container mx-auto px-6 md:px-12">
-      <div className="mb-28">
+      <div className="mb-16">
         <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 dark:text-white md:text-4xl">
           Tailus blocks leadership
         </h2>
@@ -24,15 +23,15 @@ const Teams2 = () => {
             <img
               className="mx-auto h-full w-full -rotate-45 scale-125 object-cover transition duration-300 group-hover:scale-[1.4]"
               src="/IMG_8934-1.png"
-              alt="woman"
+              alt="Fredjy LOUIS"
               loading="lazy"
               width="640"
               height="805"
             />
           </div>
           <div className="pt-4">
-            <h4 className="text-2xl text-gray-700 dark:text-white">Hentoni Doe</h4>
-            <span className="block text-sm text-gray-500">CEO-Founder</span>
+            <h4 className="text-2xl text-gray-700 dark:text-white">Fredjy LOUIS</h4>
+            <span className="block text-sm text-gray-500">Directeur Général</span>
           </div>
           <div className="flex justify-center space-x-4 text-gray-500">
             <a href="#" target="_blank" aria-label="instagram">
@@ -53,15 +52,15 @@ const Teams2 = () => {
             <img
               className="mx-auto h-full w-full -rotate-45 scale-125 object-cover transition duration-300 group-hover:scale-[1.4]"
               src="/IMG_8934-1.png"
-              alt="man"
+              alt="Fritz Berny Jean Baptiste"
               loading="lazy"
               width="1000"
               height="667"
             />
           </div>
           <div className="pt-4">
-            <h4 className="text-2xl text-gray-700 dark:text-white">Dan Orton</h4>
-            <span className="block text-sm text-gray-500">Designer</span>
+            <h4 className="text-2xl text-gray-700 dark:text-white">Fritz Berny Jean Baptiste</h4>
+            <span className="block text-sm text-gray-500">Directeur Artistique</span>
           </div>
           <div className="flex justify-center space-x-4 text-gray-500">
             <a href="#" target="_blank" aria-label="instagram">
@@ -82,15 +81,15 @@ const Teams2 = () => {
             <img
               className="mx-auto h-full w-full -rotate-45 scale-125 object-cover transition duration-300 group-hover:scale-[1.4]"
               src="/IMG_8934-1.png"
-              alt="woman"
+              alt="Agathe MOISE"
               loading="lazy"
               width="640"
               height="805"
             />
           </div>
           <div className="pt-4">
-            <h4 className="text-2xl  text-gray-700 dark:text-white">Ortance Doe</h4>
-            <span className="block text-sm text-gray-500">Marketing</span>
+            <h4 className="text-2xl  text-gray-700 dark:text-white">Agathe MOISE</h4>
+            <span className="block text-sm text-gray-500">Secrétaire</span>
           </div>
           <div className="flex justify-center space-x-4 text-gray-500">
             <a href="#" target="_blank" aria-label="instagram">

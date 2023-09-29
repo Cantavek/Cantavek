@@ -6,7 +6,7 @@ import { HeartIcon } from '@radix-ui/react-icons'
 
 const Section1 = () => {
   return (
-    <div className="py-12 bg-white" style={{ color: 'rgb(35, 36, 38)' }}>
+    <div className="py-8 md:py-12 bg-white">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-10 flex-wrap-reverse">
       <div className="mb-6 md:mb-12 order-1">
         <div className="block md:hidden">

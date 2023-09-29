@@ -37,19 +37,19 @@ const Footer = () => {
               </div>
             </div>
             <div className="col-span-8 md:col-span-6 lg:col-span-5">
-              <div className="flex items-center justify-end space-x-4 pb-16  md:pl-16">
+              <div className="flex items-center justify-end space-x-4 pb-14  md:pl-16">
                 <div>
-                  <Link href="/about" className="text-lg font-medium text-gray-800 dark:text-gray-200">
+                  <Link href="/about" className="text-base font-medium text-gray-600 dark:text-gray-200">
                     About
                   </Link>
                 </div>
                 <div>
-                  <Link href="/about" className="text-lg font-medium text-gray-800 dark:text-gray-200">
+                  <Link href="/about" className="text-base font-medium text-gray-600 dark:text-gray-200">
                     Contact
                   </Link>
                 </div>
                 <div>
-                  <Link href="/about" className="text-lg font-medium text-gray-800 dark:text-gray-200">
+                  <Link href="/about" className="text-base font-medium text-gray-600 dark:text-gray-200">
                     Privacy policy
                   </Link>
                 </div>
