@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { InstagramLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from "@radix-ui/react-icons"
+import Image from "next/image"
 import Link from "next/link"
 
 const Footer = () => {
@@ -22,7 +23,7 @@ const Footer = () => {
               <div
                 className="flex items-center justify-between gap-6 border-b border-white dark:border-gray-800 py-6 md:block md:space-y-6 md:border-none md:py-0"
               >
-                <img src="/logo.png" alt="logo tailus" width="100" height="42" className="w-32 dark:brightness-200 dark:grayscale" />
+                <Image width={100} height={42} src="/logo.png" className="w-32 mr-3" alt="Cantavek Logo"/>
                 <div className="flex gap-6">
                   <a href="#" target="blank" aria-label="github" className="hover:text-cyan-600">
                     <InstagramLogoIcon width="20" height="20"/>

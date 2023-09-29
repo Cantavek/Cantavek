@@ -24,7 +24,7 @@ const VideoCard = ({ poster, title, id, lock = true, duration }: Props) => {
           className="w-full h-full object-cover bg-skeleton rounded"
           />
           {lock && <div className='absolute top-4 right-2.5'>
-            <Button className='text-xs bg-main p-2 shadow-md h-auto rounded-full'>
+            <Button className='bg-main p-2 shadow-md h-auto rounded-full'>
               <LockClosedIcon strokeWidth={3}/>
             </Button>
           </div>}

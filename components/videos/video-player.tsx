@@ -6,7 +6,7 @@ const VideoPlayer = () => {
   const { isMobile } = useScreenDetector()
 
   return (
-    <Player theme="dark" viewType={ViewType.Video} aspectRatio={isMobile ? '16:15' : '16:10'}>
+    <Player theme="dark" viewType={ViewType.Video} aspectRatio={isMobile ? '16:15' : '16:9'}>
       <Video
         crossOrigin={''}
         poster="/kal-visuals-V1b1YDaesD4-unsplash.jpg"
