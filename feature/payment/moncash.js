@@ -1,7 +1,8 @@
 const moncash = require('nodejs-moncash-sdk');
 
 moncash.configure({
-    'mode': process.env.NODE_ENV === 'production' ? 'live' : 'sandbox',
+    // 'mode': process.env.NODE_ENV === 'production' ? 'live' : 'sandbox',
+    'mode': 'sandbox',
     'client_id': process.env.MONCASH_CLIENT_ID,
     'client_secret': process.env.MONCASH_CLIENT_SECRET, 
 })
