@@ -17,11 +17,14 @@ import { useRouter } from "next/router";
 import { signInSchema } from "@/validations/auth";
 import { useState } from "react";
 import Spinner from "../svgs/spinner";
+import { signIn } from 'next-auth/react';
+import { useToast } from "../ui/use-toast";
 
 type Inputs = z.infer<typeof signInSchema>
 
 const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
   const router = useRouter()
+  const { toast } = useToast()
   const [loading, setLoading] = useState(false)
 
   // react-hook-form
@@ -34,14 +37,25 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
   })
 
 
-  function onSubmit(data: Inputs) {
+  async function onSubmit(data: Inputs) {
       console.log(data, 'data')
       setLoading(true)
-      const t = setTimeout(() => {
-        setLoading(false)
-        handleSubmit('pay')
-        clearTimeout(t)
-      }, 2000)
+      const signInReponse = await signIn('sanity-login', {
+        redirect: false,
+        email: data.email,
+        password: data.password
+      });
+      console.log(signInReponse, 'signinResponse')
+      if(signInReponse?.ok) handleSubmit('pay')
+
+      if(!signInReponse?.ok) {
+        toast({
+          description: signInReponse?.error,
+          variant: 'destructive',
+        }) 
+      }
+
+      setLoading(false)
   }
 
   return (

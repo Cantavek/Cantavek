@@ -4,6 +4,7 @@ import { SanityAdapter, SanityCredentials } from 'next-auth-sanity';
 import { client } from '@/feature/sanity';
 
 const options: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_URL,
   providers: [
     // GitHub({
     //   clientId: process.env.GITHUB_CLIENT_ID,

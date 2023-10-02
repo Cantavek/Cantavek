@@ -13,15 +13,15 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
-import { useRouter } from "next/router";
 import { signUpSchema } from "@/validations/auth";
 import { useState } from "react";
 import Spinner from "../svgs/spinner";
+import { signUp } from 'next-auth-sanity/client';
+import { signIn } from 'next-auth/react';
 
 type Inputs = z.infer<typeof signUpSchema>
 
 const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
-  const router = useRouter()
   const [loading, setLoading] = useState(false)
 
   // react-hook-form
@@ -35,14 +35,23 @@ const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
   })
 
 
-  function onSubmit(data: Inputs) {
-      console.log(data, 'data')
-      setLoading(true)
-      const t = setTimeout(() => {
-        setLoading(false)
-        handleSubmit('pay')
-        clearTimeout(t)
-      }, 2000)
+  async function onSubmit(data: Inputs) {
+    console.log(data, 'data')
+    setLoading(true)
+    const user = await signUp({
+      email: data.email,
+      password: data.password,
+      name: data.username
+    });
+    if(!!user) {
+      const signInReponse = await signIn('sanity-login', {
+        redirect: false,
+        email: data.email,
+        password: data.password
+      });
+      if(signInReponse?.ok) handleSubmit('pay')
+    }
+    setLoading(false)
   }
 
   return (
@@ -56,7 +65,7 @@ const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="Username" {...field} />
               </FormControl>

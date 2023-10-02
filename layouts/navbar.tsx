@@ -1,14 +1,17 @@
 import { Button } from '@/components/ui/button'
 import { 
-  DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, 
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem, 
   DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import { EnterIcon, HeartIcon, PersonIcon } from "@radix-ui/react-icons"
+import { EnterIcon, ExitIcon, HeartIcon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 const Navbar = () => {
+  const { status } = useSession()
+
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-gray-200 dark:border-gray-600 z-[200]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -47,30 +50,26 @@ const Navbar = () => {
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/account">
-                  <PersonIcon
-                    className="mr-2 h-4 w-4"
-                    aria-hidden="true"
-                  />
-                  Account
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/signout">
-                <EnterIcon
+          <DropdownMenuItem asChild>
+            {status === 'authenticated' ? 
+              <Button variant={'ghost'} className='w-full justify-start hover:border-none hover:outline-none'>
+                <ExitIcon
                 className="mr-2 h-4 w-4"
                 aria-hidden="true"
                 />
-                Log in
-              </Link>
-            </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+                Logout
+              </Button>
+            :<Link href="/login" className='cursor-pointer'>
+              <EnterIcon
+              className="mr-2 h-4 w-4"
+              aria-hidden="true"
+              />
+              Log in
+            </Link>}
+          </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
   {/* <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
     <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Feature from '@/components/home/feature'
 import Hero from '@/components/home/hero'
 import Section1 from '@/components/home/section-1'
