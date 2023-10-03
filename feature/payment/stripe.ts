@@ -4,24 +4,26 @@ const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY as string, 
   { apiVersion: '2023-08-16' }
 );
+type Bundle = {
+  name: string
+  price: number
+}
 
-export const createStripeSession = async (items: any, client_reference_id: string) => {
-  const products = items.products.map((p: any) => {
-    return {
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: p.product.title,
-        },
-        unit_amount: +p.product.prices.usd.price * 100,
-      },
-      quantity: p.quantity,
-    }
-  })
-
+export const createStripeSession = async (bundle: Bundle, client_reference_id: string) => {
   const session = await stripe.checkout.sessions.create({
     client_reference_id,
-    line_items: products,
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: bundle.name
+          },
+          unit_amount: bundle.price * 100
+        },
+        quantity: 1
+      }
+    ],
     mode: 'payment',
     success_url: `${process.env.APP_URL}/orders/thanks?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.APP_URL}/checkout`,

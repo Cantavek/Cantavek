@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { EnterIcon, ExitIcon, HeartIcon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { useSession,  signOut } from 'next-auth/react';
 
 const Navbar = () => {
   const { status } = useSession()
@@ -52,7 +52,11 @@ const Navbar = () => {
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             {status === 'authenticated' ? 
-              <Button variant={'ghost'} className='w-full justify-start hover:border-none hover:outline-none'>
+              <Button 
+              variant={'ghost'} 
+              className='w-full justify-start hover:border-none hover:outline-none'
+              onClick={() => signOut()}
+              >
                 <ExitIcon
                 className="mr-2 h-4 w-4"
                 aria-hidden="true"

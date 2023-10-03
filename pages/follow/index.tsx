@@ -1,8 +1,16 @@
 import Pricing from '@/components/pricing'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { getAllBundle } from '@/feature/sanity/bundle'
 import Layout from '@/layouts'
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
-const Follow = () => {
+export const getStaticProps = (async (context) => {
+  const bundles = await getAllBundle()
+
+  return { props: { bundles } }
+}) satisfies GetStaticProps
+
+const Follow = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
       <div className='pb-20 pt-24'>
@@ -20,7 +28,7 @@ const Follow = () => {
           </div>
         </div>
         <div className='max-w-6xl mx-auto'>
-          <Pricing/>
+          <Pricing bundles={bundles}/>
         </div>
         <div className='max-w-4xl mx-4 md:mx-auto pt-20'>
           <h2 className='text-center text-5xl font-bold pb-2'>FAQs</h2>

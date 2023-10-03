@@ -1,8 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
 import PaymentForm from '../forms/payment-form'
+import { Bundle } from '@/feature/sanity'
 
-const PaymentCard = () => {
-
+const PaymentCard = ({ bundles}: { bundles: Bundle[] }) => {
   return (
     <Card>
       <CardHeader className="space-y-1">
@@ -12,7 +12,7 @@ const PaymentCard = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <PaymentForm/>
+        <PaymentForm bundles={bundles}/>
       </CardContent>
     </Card>
   )

@@ -12,18 +12,21 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form'
 import Spinner from '../svgs/spinner'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 import { useRouter } from 'next/router'
+import { Bundle } from '@/feature/sanity'
 
 type Inputs = z.infer<typeof paymentSchema>
 
-const PaymentForm = () => {
-  const defaultBundle = (useRouter().query?.bundle as string) || 'super-fan'
+const PaymentForm = ({ bundles}: { bundles: Bundle[] }) => {
+  const router = useRouter()
+  const defaultBundle = (router.query?.bundle as string)
+  const defaultPaymentType = (router.query?.payment_type as 'moncash' | 'stripe') || "moncash"
   const [loading, setLoading] = useState(false)
 
   const form = useForm<Inputs>({
     resolver: zodResolver(paymentSchema),
     defaultValues: {
       bundle: defaultBundle,
-      payment_type: "moncash",
+      payment_type: defaultPaymentType,
     },
   })
 
@@ -55,31 +58,23 @@ const PaymentForm = () => {
           <FormField
           control={form.control}
           name="bundle"
-          render={({ field }) => (
+          render={({ field, formState }) => (
             <FormItem>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger className="w-full h-full">
                   <SelectValue placeholder="Basic" />    
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="fan">
-                    <div className='flex flex-col items-start'>
-                      <span className='font-semibold text-sm text-gray-700'>Fan</span>
-                      <span className='text-gray-700'>$32 for 3 months</span>
-                    </div>
+                  {bundles.map((bundle) => (
+                    <SelectItem value={bundle._id} key={bundle._id}>
+                      <div className='flex flex-col items-start'>
+                        <span className='font-semibold text-sm text-gray-700'>{bundle.name}</span>
+                        <span className='text-gray-700'>
+                          {form.getValues('payment_type') === 'moncash' ? `${bundle.price_gdes} HTG` : `$${bundle.price_usd}`} for {bundle.duration} months
+                        </span>
+                      </div>
                   </SelectItem>
-                  <SelectItem value="super-fan">
-                    <div className='flex flex-col items-start'>
-                      <span className='font-semibold text-sm text-gray-700'>Super fan</span>
-                      <span className='text-gray-700'>$64 for 6 months</span>
-                    </div>
-                  </SelectItem>
-                  <SelectItem value="mega-fan">
-                    <div className='flex flex-col items-start'>
-                      <span className='font-semibold text-sm text-gray-700'>Mega fan</span>
-                      <span className='text-gray-700'>$128 for 1 year</span>
-                    </div>
-                  </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </FormItem>
