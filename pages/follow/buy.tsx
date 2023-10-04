@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 
 export type Section = 'login' | 'register' | 'pay';
 
-export const getStaticProps = (async (context) => {
+export const getStaticProps = (async () => {
   const bundles = await getAllBundle()
 
   return { props: { bundles } }

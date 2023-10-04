@@ -3,7 +3,7 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import { SanityAdapter, SanityCredentials } from 'next-auth-sanity';
 import { client } from '@/feature/sanity/client';
 
-const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_URL,
   providers: [
     // GitHub({
@@ -18,4 +18,4 @@ const options: NextAuthOptions = {
   adapter: SanityAdapter(client)
 };
 
-export default NextAuth(options);
+export default NextAuth(authOptions);

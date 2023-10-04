@@ -4,7 +4,7 @@ import { getAllBundle } from '@/feature/sanity/bundle'
 import Layout from '@/layouts'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
-export const getStaticProps = (async (context) => {
+export const getStaticProps = (async () => {
   const bundles = await getAllBundle()
 
   return { props: { bundles } }

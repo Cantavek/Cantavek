@@ -18,13 +18,14 @@ import { useState } from "react";
 import Spinner from "../svgs/spinner";
 import { signUp } from 'next-auth-sanity/client';
 import { signIn } from 'next-auth/react';
+import { useToast } from "../ui/use-toast";
 
 type Inputs = z.infer<typeof signUpSchema>
 
 const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
   const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
 
-  // react-hook-form
   const form = useForm<Inputs>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -36,20 +37,24 @@ const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
 
 
   async function onSubmit(data: Inputs) {
-    console.log(data, 'data')
     setLoading(true)
     const user = await signUp({
       email: data.email,
       password: data.password,
       name: data.username
     });
-    if(!!user) {
+    if(!!user && user?.email) {
       const signInReponse = await signIn('sanity-login', {
         redirect: false,
         email: data.email,
         password: data.password
       });
       if(signInReponse?.ok) handleSubmit('pay')
+    }else{
+      toast({
+        description: (user as any)?.error as any || "User already exist",
+        variant: 'destructive',
+      })
     }
     setLoading(false)
   }

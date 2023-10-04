@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
-import { useRouter } from "next/router";
 import { signInSchema } from "@/validations/auth";
 import { useState } from "react";
 import Spinner from "../svgs/spinner";
@@ -23,7 +22,6 @@ import { useToast } from "../ui/use-toast";
 type Inputs = z.infer<typeof signInSchema>
 
 const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
-  const router = useRouter()
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
 
@@ -38,7 +36,6 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
 
 
   async function onSubmit(data: Inputs) {
-      console.log(data, 'data')
       setLoading(true)
       const signInReponse = await signIn('sanity-login', {
         redirect: false,
