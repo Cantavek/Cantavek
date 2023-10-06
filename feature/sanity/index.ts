@@ -53,6 +53,8 @@ export type User = {
   _id: string,
   name: string,
   email: string
+  active_bundle?: Bundle,
+  active_bundle_expire_at?: string
 }
 
 export const getAllBundle = async () => {
@@ -80,6 +82,11 @@ export const getUserByEmail = async (email: string) => {
   return client.fetch<User>(`*[_type == "user" && email == $email][0]{
     _id,
     email,
-    name
+    name,
+    "active_bundle": active_bundle->{
+      _id,
+      name
+    },
+    active_bundle_expire_at
   }`, {email})
 }

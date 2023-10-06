@@ -25,7 +25,7 @@ export default async function handler(
       .status(200)
       .send({ message: "You are not authenticated.", error: true });
     }
-    
+  
     const bundleId = (JSON.parse(req.body))?.bundle
   
     if(!bundleId) {
