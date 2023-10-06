@@ -39,8 +39,7 @@ export const getPaymentByTransactionId = async (transactionId) => {
                 reject({ msg: "Capture dont't exist" })
             }
         });
-    });
-    
+    });  
 }
 
 export const getPaymentByOrderId = (orderId) => {

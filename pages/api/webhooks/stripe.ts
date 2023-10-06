@@ -1,6 +1,8 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { stripe } from '@/feature/payment';
+import { client, getBundle, getUserByEmail } from '@/feature/sanity';
+import dayjs from 'dayjs';
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { buffer } from 'stream/consumers';
 import Stripe from 'stripe';
 
 type Data = {
@@ -18,13 +20,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  res.status(200).json({ name: 'John Doe' })
   if (req.method === 'POST') {
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_KEY as string;
     const sig = req.headers['stripe-signature'] as string;
     let event: Stripe.Event
-    // const buff = await buffer(req);
-    const buff = '';
+    const buff = await buffer(req);
     
     try {
       event = stripe.webhooks.constructEvent(buff, sig, endpointSecret);
@@ -33,8 +33,7 @@ export default async function handler(
         body, sig, buff});
         return;
     }
-    // // checkout.session.async_payment_failed
-    // //checkout.session.completed
+
     let session
     switch (event.type) {
       case 'checkout.session.completed': {
@@ -43,11 +42,31 @@ export default async function handler(
           id: string;
         };
         const referenceId = session.client_reference_id.split('/');
-        const userId = referenceId[0]
-        const orderId = referenceId[1]
-  
-        res.status(200).json({msg: "Your order have been created"});
-        return
+        const bundleId = referenceId[1]
+        const userEmail = referenceId[2]
+
+        const user = await getUserByEmail(userEmail)
+        const bundle = await getBundle(bundleId)
+
+        if(!!user && !!bundle) {
+          const expire_at = dayjs().add(bundle.duration, 'months').toISOString();
+
+          const userPatch = client
+            .patch(user._id)
+            .set({ active_bundle: { _ref: bundleId, _type: 'reference'}});
+
+          client
+            .transaction().patch(userPatch).create({
+              _type: 'purchase',
+              user: { _ref: user._id, _type: 'reference'}, 
+              bundle: { _ref: bundleId, _type: 'reference'}, 
+              expire_at
+            })
+            .commit()
+            .then(() => {
+              console.log('Whole lot of stuff just happened')
+            })
+        }
         // Then define and call a function to handle the event invoice.payment_succeeded
         break;
       } 
@@ -57,5 +76,8 @@ export default async function handler(
         return
       }
     }
+
+    res.status(200).json({msg: "Your order have been created"});
+    return
   }
 }
