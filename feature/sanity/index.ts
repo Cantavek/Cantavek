@@ -38,7 +38,13 @@ export const client = createClient({
 //     },
 //   })
 // }
-
+export type User = {
+  _id: string,
+  name: string,
+  email: string
+  active_bundle?: Bundle,
+  active_bundle_expire_at?: string
+}
 
 export type Bundle = {
   _id: string,
@@ -49,12 +55,14 @@ export type Bundle = {
   accesses: string[],
 }
 
-export type User = {
+export type Video = {
   _id: string,
-  name: string,
-  email: string
-  active_bundle?: Bundle,
-  active_bundle_expire_at?: string
+  title: string,
+  duration: string,
+  lock: boolean
+  poster: string
+  teaser?: string
+  video?: string
 }
 
 export const getAllBundle = async () => {
@@ -85,8 +93,51 @@ export const getUserByEmail = async (email: string) => {
     name,
     "active_bundle": active_bundle->{
       _id,
-      name
+      name,
+      duration,
     },
     active_bundle_expire_at
   }`, {email})
+}
+
+export const getVideos = () => {
+  return client.fetch<Video[]>(`*[_type == "video"]{
+    _id,
+    title,
+    lock,
+    'poster': poster.asset->url,
+    duration,
+  }`)
+}
+
+export const getVideo = (id: string, unlock: boolean) => {
+  if(unlock) {
+    return client.fetch<Video>(`*[_type == "video" && _id == $id][0]{
+      _id,
+      title,
+      lock,
+      'poster': poster.asset->url,
+      'video': video.asset->url,
+      duration,
+    }`, { id })
+  }
+  return client.fetch<Video>(`*[_type == "video" && _id == $id][0]{
+    _id,
+    title,
+    lock,
+    'poster': poster.asset->url,
+    'teaser': teaser.asset->url,
+    duration,
+  }`, { id })
+}
+
+export const getOtherVideos = (id: string) => {
+  return client.fetch<Video[]>(`*[_type == "video" && _id != $id][0...5]{
+    _id,
+    title,
+    lock,
+    'poster': poster.asset->url,
+    'teaser': teaser.asset->url,
+    duration,
+  }`, { id })
 }

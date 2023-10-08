@@ -1,5 +1,6 @@
 import Feature from '@/components/home/feature'
-import Hero from '@/components/home/hero'
+// import Hero from '@/components/home/hero'
+import HeroSlider from '@/components/home/hero-slider'
 import Section1 from '@/components/home/section-1'
 import Section2 from '@/components/home/section-2'
 import Sponsors from '@/components/home/sponsors'
@@ -10,7 +11,10 @@ export default function Home() {
   return (
     <Layout showVideoButton={true}>
       <div className='pt-[4rem]'>
-        <Hero/>
+        {/* <Hero/> */}
+        <div className="pb-10">
+          <HeroSlider/>
+        </div>
         <Section1/>
         <Feature/>
         <Section2/>

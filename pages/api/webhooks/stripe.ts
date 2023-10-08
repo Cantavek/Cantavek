@@ -5,10 +5,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { buffer } from 'stream/consumers';
 import Stripe from 'stripe';
 
-type Data = {
-  name: string
-}
-
 export const config = {
   api: {
     bodyParser: false,
@@ -53,7 +49,10 @@ export default async function handler(
 
           const userPatch = client
             .patch(user._id)
-            .set({ active_bundle: { _ref: bundleId, _type: 'reference'}});
+            .set({ 
+              active_bundle: { _ref: bundleId, _type: 'reference' },
+              active_bundle_expire_at: expire_at
+            });
 
           client
             .transaction().patch(userPatch).create({
