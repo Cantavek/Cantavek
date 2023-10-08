@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useSession,  signOut } from 'next-auth/react';
 
 const Navbar = () => {
-  const { status } = useSession()
+  const { status, data } = useSession()
 
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-gray-200 dark:border-gray-600 z-[200]">
@@ -40,14 +40,22 @@ const Navbar = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 rounded-lg z-[210]" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
-            <div className="flex flex-col space-y-1">
+            {status === 'unauthenticated' ? <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                Oliver Jean Baptiste
+                No user
               </p>
               <p className="text-xs leading-none text-muted-foreground">
-                oliver@gmail.com
+                You should: 
               </p>
-            </div>
+            </div> : 
+            <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">
+              {data?.user.name}
+            </p>
+            <p className="text-xs leading-none text-muted-foreground">
+              {data?.user.email}
+            </p>
+          </div>}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>

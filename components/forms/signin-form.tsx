@@ -14,16 +14,24 @@ import {
 import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
 import { signInSchema } from "@/validations/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../svgs/spinner";
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useToast } from "../ui/use-toast";
 
 type Inputs = z.infer<typeof signInSchema>
 
-const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) => {
+const SignInForm = ({ handleSubmit, nextSection }: { handleSubmit: (section: any) => void, nextSection: string }) => {
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
+  const { status} = useSession()
+
+  useEffect(() => {
+    if(status === 'authenticated') {
+      handleSubmit(nextSection)
+    }
+  }, [handleSubmit, nextSection, status])
+
 
   // react-hook-form
   const form = useForm<Inputs>({
@@ -43,7 +51,7 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
         password: data.password
       });
       console.log(signInReponse, 'signinResponse')
-      if(signInReponse?.ok) handleSubmit('pay')
+      if(signInReponse?.ok) handleSubmit(nextSection)
 
       if(!signInReponse?.ok) {
         toast({
@@ -87,7 +95,7 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
             </FormItem>
           )}
         />
-        <Button disabled={loading} >
+        <Button disabled={loading || status === 'loading'} >
           {loading && (
             <Spinner
               className="mr-2 h-4 w-4 animate-spin"
@@ -95,7 +103,6 @@ const SignInForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
             />
           )}
           Continue
-          <span className="sr-only">Continue to email verification page</span>
         </Button>
       </form>
     </Form>

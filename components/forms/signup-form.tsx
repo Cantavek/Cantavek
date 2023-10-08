@@ -29,7 +29,7 @@ const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
   const form = useForm<Inputs>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      username: '',
+      name: '',
       email: "",
       password: "",
     },
@@ -38,11 +38,7 @@ const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
 
   async function onSubmit(data: Inputs) {
     setLoading(true)
-    const user = await signUp({
-      email: data.email,
-      password: data.password,
-      name: data.username
-    });
+    const user = await signUp(data);
     if(!!user && user?.email) {
       const signInReponse = await signIn('sanity-login', {
         redirect: false,
@@ -67,10 +63,10 @@ const SignUpForm = ({ handleSubmit }: { handleSubmit: (section: any) => void}) =
       >
         <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
                 <Input placeholder="Username" {...field} />
               </FormControl>

@@ -39,9 +39,12 @@ const PaymentForm = ({ bundles}: { bundles: Bundle[] }) => {
           method: 'POST',
           body: JSON.stringify({ bundle: data.bundle })
         })
-        const payemtResponse: {url?: string, message: string, error: boolean} = await res.json()
-        if(payemtResponse.error === false && payemtResponse.url) {
-          window.location.href = payemtResponse.url
+        setLoading(false)
+        if(res.status === 200) {
+          const payemtResponse: {url?: string, message: string, error: boolean} = await res.json()
+          if(payemtResponse.error === false && payemtResponse.url) {
+            window.location.href = payemtResponse.url
+          }
         }
       }catch(e){
         console.log(e, 'error')

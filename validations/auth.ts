@@ -13,7 +13,7 @@ export const signInSchema = z.object({
 })
 
 export const signUpSchema = z.object({
-  username: z.string(),
+  name: z.string(),
   email: z.string().email({
     message: "Please enter a valid email address",
   }),

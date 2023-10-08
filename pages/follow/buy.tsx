@@ -4,10 +4,9 @@ import SignUpCard from '@/components/cards/signup-card'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { getAllBundle } from '@/feature/sanity/bundle'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export type Section = 'login' | 'register' | 'pay';
 
@@ -18,16 +17,10 @@ export const getStaticProps = (async () => {
 }) satisfies GetStaticProps
 
 const Buy = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { status } = useSession()
   const [section, setSection] = useState<Section>('login')
 
   const handleChangeSection = (section: Section) => setSection(section)
 
-  useEffect(() => {
-    if(status === 'authenticated') {
-      setSection('pay')
-    }
-  }, [status])
 
   return (
     <div className="grid min-h-screen grid-cols-1 overflow-hidden md:grid-cols-3 lg:grid-cols-2 relative">
@@ -36,7 +29,7 @@ const Buy = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => {
       </Link>
       <main className="container absolute top-1/2 col-span-1 flex -translate-y-1/2 items-center md:static md:top-0 md:col-span-2 md:flex md:translate-y-0 lg:col-span-1 z-40 px-2 sm:px-6">
         <section className={ "container max-w-lg grid items-center gap-8 pb-8 pt-6 md:py-8 px-1 md:px-12"}>
-          {section === 'login' && <SignInCard handleSubmit={handleChangeSection} />}
+          {section === 'login' && <SignInCard handleSubmit={handleChangeSection} nextSection='pay' />}
           {section === 'register' && <SignUpCard handleSubmit={handleChangeSection} />}
           {section === 'pay' && <PaymentCard bundles={bundles}/>}
         </section>
