@@ -1,6 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
+import { Home } from "@/feature/sanity"
+import Image from "next/image"
 
-const Sponsors = () => {
+const Sponsors = ({ sponsors }: { sponsors: Home['sponsors']}) => {
   return (
     <div className="py-5">
       <div className="sm:max-w-5xl pt-3 rounded-xl bg-white mx-4 sm:mx-8 md:mx-auto">
@@ -13,30 +14,20 @@ const Sponsors = () => {
           </p>
         </div>
         <div className="flex flex-wrap justify-center items-center space-x-3">
-          <div
-            className="w-1/3 sm:w-1/6 flex flex-col justify-center xl:pb-10 pb-8 items-center inset-0 transform  hover:scale-125 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-            <img className="focus:outline-none w-16 rounded-full" src="/IMG_4879.jpg"
-              alt="Adidas" role="img" />
-              <span className='font-semibold text-center text-sm text-gray-600'>Izi Connect</span>
-          </div>
-          <div
-            className="w-1/3 sm:w-1/6 flex flex-col justify-center xl:pb-10 pb-8 items-center inset-0 transform  hover:scale-125 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl ">
-            <img className="focus:outline-none w-16 rounded-full" src="/tap-tap-send.png"
-              alt="Chanel" role="img" />
-              <span className='font-semibold text-center text-sm text-gray-600'>Tap tap send</span>
-          </div>
-          <div
-            className="w-1/3 sm:w-1/6 flex flex-col justify-center xl:pb-10 pb-8 items-center inset-0 transform  hover:scale-125 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-            <img className="focus:outline-none w-16 rounded-full" src="/IMG_4880.jpg"
-              alt="Nike" role="img" />
-              <span className='font-semibold text-center text-sm text-gray-600'>Izi Access</span>
-          </div>
-          <div
-            className="w-1/3 sm:w-1/6 flex flex-col justify-center xl:pb-10 pb-8 items-center inset-0 transform  hover:scale-125 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
-            <img className="focus:outline-none w-16 rounded-full" src="https://cdn-icons-png.flaticon.com/128/732/732242.png"
-              alt="Toyota" role="img" />
-            <span className='font-semibold text-center text-sm text-gray-600'>Ras APA</span>
-          </div>
+          {sponsors.map((sponsor, i) => (
+            <div
+            key={i}
+            className="w-3/12 sm:w-1/6 flex flex-col justify-center xl:pb-10 pb-8 items-center inset-0 transform  hover:scale-125 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
+              <Image 
+              width={65} 
+              height={63} 
+              className="focus:outline-none w-16 rounded-full" 
+              src={sponsor.logo}
+              alt={sponsor.name} 
+              role="img" />
+              <span className='font-semibold text-center text-sm text-gray-600'>{sponsor.name}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

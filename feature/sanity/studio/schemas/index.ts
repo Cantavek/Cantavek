@@ -37,12 +37,16 @@ import seo from './objects/seo/seo'
 import seoHome from './objects/seo/home'
 import seoPage from './objects/seo/page'
 import seoDescription from './objects/seo/description'
+import sponsorVariant from './objects/sponsorVariant'
+import teamVariant from './objects/teamVariant'
 
 const objects = [
   seo,
   seoHome,
   seoPage,
   seoDescription,
+  sponsorVariant,
+  teamVariant
 ]
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]

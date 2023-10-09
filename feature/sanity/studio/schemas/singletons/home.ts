@@ -10,9 +10,12 @@ export default defineField({
   icon: HomeIcon,
   groups: [
     {
-      default: true,
-      name: 'editorial',
-      title: 'Editorial',
+      name: 'team',
+      title: 'Team',
+    },
+    {
+      name: 'sponsors',
+      title: 'Sponsors',
     },
     {
       name: 'seo',
@@ -27,6 +30,20 @@ export default defineField({
     //   type: 'hero.home',
     //   group: 'editorial',
     // }),
+    defineField({
+      name: 'teams',
+      title: 'Team list',
+      type: 'array',
+      of: [{ type: 'teamVariant'}],
+      group: 'team',
+    }),
+    defineField({
+      name: 'list',
+      title: 'Sponsor list',
+      type: 'array',
+      of: [{ type: 'sponsorVariant'}],
+      group: 'sponsors',
+    }),
     // SEO
     defineField({
       name: 'seo',

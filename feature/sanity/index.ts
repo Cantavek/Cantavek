@@ -27,33 +27,33 @@ export function urlForImage(source: SanityImageSource) {
   return imageBuilder.image(source);
 }
 
-
-// const DEFAULT_PARAMS = {} as QueryParams
-// const DEFAULT_TAGS = [] as string[]
-
-// export async function sanityFetch<QueryResponse>({
-//   query,
-//   params = DEFAULT_PARAMS,
-//   tags = DEFAULT_TAGS,
-// }: {
-//   query: string
-//   params?: QueryParams
-//   tags: string[]
-// }): Promise<QueryResponse> {
-//   return client.fetch<QueryResponse>(query, params, {
-//     cache: 'force-cache',
-//     next: {
-//       //revalidate: 30, // for simple, time-based revalidation
-//       tags, // for tag-based revalidation
-//     },
-//   })
-// }
 export type User = {
   _id: string,
   name: string,
   email: string
   active_bundle?: Bundle,
   active_bundle_expire_at?: string
+}
+
+export type Home = {
+  seo: {
+    title: string,
+    description: string,
+    image: string,
+  }[],
+  team: {
+    name: string,
+    role: string,
+    avatar: string,
+    instagram_link: string,
+    twitter_link: string,
+    linkedin_link: string
+  }[],
+  sponsors:{
+    name: string,
+    logo: string,
+    link: string
+  }[]
 }
 
 export type Bundle = {
@@ -86,6 +86,7 @@ export type Page = {
     description: string,
   }
 }
+
 
 export const getAllBundle = async () => {
   return client.fetch<Bundle[]>(`*[_type == "bundle"] | order(_createdAt asc){
@@ -175,4 +176,27 @@ export const getPage = (title: string) => {
       description,
     }
   }`, { title })
-} 
+}
+
+export const getHomePageData = () => {
+  return client.fetch<Home>(`*[_type == 'home'][0]{
+    "seo": seo{
+      title,
+      description,
+      'image': image.asset->url,
+    },
+    "team": teams[]{
+      name,
+      role,
+      "avatar": avatar.asset->url,
+      instagram_link,
+      twitter_link,
+      linkedin_link,
+    },
+    "sponsors": list[]{
+      name,
+      "logo": logo.asset->url,
+      link
+    }
+  }`)
+}
