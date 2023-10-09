@@ -1,8 +1,6 @@
 import {DocumentIcon} from '@sanity/icons'
 import {defineField} from 'sanity'
 
-import {validateSlug} from '../../utils/validateSlug'
-
 export default defineField({
   name: 'page',
   title: 'Page',
@@ -17,18 +15,25 @@ export default defineField({
   fields: [
     // Title
     defineField({
-      name: 'title',
       title: 'Title',
+      name: 'title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
     }),
-    // Slug
     defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {source: 'title'},
-      // @ts-ignore - TODO - fix this TS error
-      validation: validateSlug,
+      title: 'Image',
+      name: 'image',
+      type: 'image',
+      description: 'Add a image you want a image at the top of the page',
+      options: {
+        hotspot: true
+      },
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro',
+      description: 'A little intro',
+      type: 'text',
+      validation: Rule => Rule.required()
     }),
     // Body
     defineField({
@@ -36,6 +41,7 @@ export default defineField({
       title: 'Body',
       description: 'All text you want to add in this page',
       type: 'body',
+      validation: Rule => Rule.required()
     }),
     // SEO
     defineField({
@@ -43,19 +49,15 @@ export default defineField({
       title: 'SEO',
       type: 'seo.page',
       group: 'seo',
+      validation: Rule => Rule.required()
     }),
   ],
   preview: {
     select: {
-      active: 'active',
-      seoImage: 'seo.image',
       title: 'title',
     },
-    prepare(selection) {
-      const {seoImage, title} = selection
-
+    prepare({ title }) {
       return {
-        media: seoImage,
         title,
       }
     },

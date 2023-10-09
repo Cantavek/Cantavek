@@ -2,7 +2,7 @@ import React from 'react'
 import { HomeIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 
-const BreadCrumbs = () => {
+const BreadCrumbs = ({ actualPage }: { actualPage: string}) => {
   return (
     <nav className="flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -21,8 +21,10 @@ const BreadCrumbs = () => {
         </li> */}
         <li aria-current="page">
           <div className="flex items-center">
-          <ChevronRightIcon strokeWidth={2} width={24} height={24} className="mx-1 text-gray-400"/>
-            <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">About</span>
+            <ChevronRightIcon strokeWidth={2} width={24} height={24} className="mx-1 text-gray-400"/>
+            <span className="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">
+              {actualPage}
+            </span>
           </div>
         </li>
       </ol>

@@ -1,14 +1,14 @@
 import Pricing from '@/components/pricing'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { getAllBundle } from '@/feature/sanity/bundle'
+import { getAllBundle } from '@/feature/sanity'
 import Layout from '@/layouts'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { InferGetStaticPropsType } from 'next'
 
-export const getStaticProps = (async () => {
+export const getStaticProps = async () => {
   const bundles = await getAllBundle()
 
   return { props: { bundles } }
-}) satisfies GetStaticProps
+}
 
 const Follow = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (

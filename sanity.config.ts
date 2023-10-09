@@ -15,8 +15,8 @@ export default defineConfig({
   basePath: '/admin',
   title: 'cantavek',
 
-  projectId: 'f5exgevg',
-  dataset: 'developement',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
 
   plugins: [
     deskTool({structure}),

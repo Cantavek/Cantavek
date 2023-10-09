@@ -1,24 +1,23 @@
-/* eslint-disable @next/next/no-img-element */
 import BreadCrumbs from '@/components/bread-crumbs'
 import { getPage } from '@/feature/sanity'
 import BlockText from '@/feature/sanity/block-text'
 import Layout from '@/layouts'
 import { InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
+import React from 'react'
 
-export async function getStaticProps() {
-  const data = await getPage('About')
+export const getStaticProps = async () => {
+  const data = await getPage('Privacy Policy')
 
   return { props: { data } }
 }
 
-const About = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
-
+const Privacy = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
       <section className="my-10 md:my-14 pt-16">  
         <div className="container mx-auto w-full px-2 md:px-7">
-          <BreadCrumbs actualPage='About'/>
+          <BreadCrumbs actualPage='Privacy Policy'/>
         </div>
       </section>
       {data?.image && <section className="mb-16 -mt-4">
@@ -50,4 +49,4 @@ const About = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   )
 }
 
-export default About
+export default Privacy

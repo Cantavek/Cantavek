@@ -1,8 +1,7 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 // import Google from 'next-auth/providers/google';
 import { SanityAdapter, SanityCredentials } from 'next-auth-sanity';
-import { client } from '@/feature/sanity/client';
-import { getUserByEmail } from '@/feature/sanity';
+import { client, getUserByEmail } from '@/feature/sanity';
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_URL,

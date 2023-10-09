@@ -1,4 +1,6 @@
 import { createClient } from "next-sanity";
+import imageUrlBuilder from '@sanity/image-url'
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 // import type {QueryParams} from '@sanity/client'
 
 
@@ -6,6 +8,7 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2023-06-20'
 export const SanityToken = process.env.SECRET_SANITY_VIEW_TOKEN
+
 
 // npm i @portabletext/react @sanity/image-url
 
@@ -17,6 +20,13 @@ export const client = createClient({
   useCdn: false,
   // perspective: 'published',
 })
+
+export const imageBuilder = imageUrlBuilder(client);
+
+export function urlForImage(source: SanityImageSource) {
+  return imageBuilder.image(source);
+}
+
 
 // const DEFAULT_PARAMS = {} as QueryParams
 // const DEFAULT_TAGS = [] as string[]
@@ -63,6 +73,18 @@ export type Video = {
   poster: string
   teaser?: string
   video?: string
+}
+
+export type Page = {
+  _id: string,
+  title: string,
+  image?: string
+  intro: string,
+  body: any
+  seo: {
+    title: string,
+    description: string,
+  }
 }
 
 export const getAllBundle = async () => {
@@ -141,3 +163,16 @@ export const getOtherVideos = (id: string) => {
     duration,
   }`, { id })
 }
+
+export const getPage = (title: string) => {
+  return client.fetch<Page>(`*[_type == 'page' && title == $title][0]{
+    title,
+    "image": image.asset->url,
+    intro,
+    body,
+    seo{
+      title,
+      description,
+    }
+  }`, { title })
+} 
