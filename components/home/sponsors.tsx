@@ -1,9 +1,11 @@
 import { Home } from "@/feature/sanity"
 import Image from "next/image"
+import Link from "next/link"
+import { Button } from "../ui/button"
 
 const Sponsors = ({ sponsors }: { sponsors: Home['sponsors']}) => {
   return (
-    <div className="py-5">
+    <div className="py-8">
       <div className="sm:max-w-5xl pt-3 rounded-xl bg-white mx-4 sm:mx-8 md:mx-auto">
         <div className="w-11/12 sm:w-2/3 mx-auto mb-10">
           <h1 className="focus:outline-none xl:text-4xl text-3xl text-center text-gray-800 font-extrabold pt-4">
@@ -28,6 +30,12 @@ const Sponsors = ({ sponsors }: { sponsors: Home['sponsors']}) => {
               <span className='font-semibold text-center text-sm text-gray-600'>{sponsor.name}</span>
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-center items-center">
+            <Button asChild className="bg-main rounded-2xl">
+              <Link href={'/sponsoring'} className="font-semibold">Become a sponsor</Link>
+            </Button>
         </div>
       </div>
     </div>

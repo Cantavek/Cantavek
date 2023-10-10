@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button'
 import { 
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, 
-  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger 
+  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
-import { EnterIcon, ExitIcon, HeartIcon } from "@radix-ui/react-icons"
+import { BookmarkIcon, EnterIcon, ExitIcon, HeartIcon, Link2Icon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import Image from 'next/image';
 import { useSession,  signOut } from 'next-auth/react';
@@ -61,6 +61,23 @@ const Navbar = () => {
               </p>
             </div>}
             </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href={'/contact'}>
+                Book Cantavek
+                <DropdownMenuShortcut>
+                  <BookmarkIcon/>
+                </DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={'/sponsoring'}>
+                Become Sponsor
+                <DropdownMenuShortcut>
+                  <Link2Icon/>
+                </DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               {status === 'authenticated' ? 

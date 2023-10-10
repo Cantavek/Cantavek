@@ -16,9 +16,11 @@ import account from './documents/account'
 import bundle from './documents/bundle'
 import purchase from './documents/purchase'
 import video from './documents/video'
+import sponsoringType from './documents/sponsoring-type'
+import sponsors from './documents/sponsors'
 
 const documents = [
-  user, account, video, bundle, page, purchase
+  user, account, video, bundle, page, purchase, sponsoringType, sponsors
 ]
 
 // Singleton document types
