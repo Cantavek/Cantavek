@@ -27,8 +27,8 @@ export const createStripeSession = async (bundle: Bundle, client_reference_id: s
       }
     ],
     mode: 'payment',
-    success_url: `${process.env.APP_URL}/orders/thanks?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.APP_URL}/checkout`,
+    success_url: `${process.env.APP_URL}/thanks?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.APP_URL}`,
   });
   return session;
 }
