@@ -8,6 +8,7 @@ import { authOptions } from '../api/auth/[...nextauth]';
 import dayjs from 'dayjs';
 import { getOtherVideos, getVideo } from '@/feature/sanity';
 import VideoPlayer from '@/components/videos/video-player';
+import { useMemo } from 'react';
 
 export async function getServerSideProps(context: GetServerSidePropsContext<{ id: string}>) {
   const session = await await getServerSession(
@@ -28,16 +29,38 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ id
 }
 
 const Video = ({ unlock, video, otherVideos }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const videoJsOptions = {
-    autoplay: false,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    poster: !unlock && !video.teaser ? video.poster : null,
-    sources: {
-      src: unlock ? video.video : !!video.teaser ? video.teaser : null,
+  let videoJsOptions =  useMemo(() => {
+    if(unlock) {
+      return {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: {
+          src: video.video
+        }
+      }
+    }else if(!!video.teaser) {
+      return {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: {
+          src: video.teaser
+        }
+      }
+    }else{
+      return {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        poster: !unlock && !video.teaser ? video.poster : null,
+      }
     }
-  }
+  }, [unlock, video.poster, video.teaser, video.video])
+
 
   return (
     <Layout>

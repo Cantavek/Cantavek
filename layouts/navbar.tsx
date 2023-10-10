@@ -8,10 +8,8 @@ import { EnterIcon, ExitIcon, HeartIcon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import Image from 'next/image';
 import { useSession,  signOut } from 'next-auth/react';
-import dayjs from "dayjs"
-import relativeTime from "dayjs/plugin/relativeTime"
-
-dayjs.extend(relativeTime)
+import dynamic from 'next/dynamic';
+const BundleDrawer = dynamic(() => import('./bundle-drawer'))
 
 const Navbar = () => {
   const { status, data } = useSession()
@@ -31,9 +29,7 @@ const Navbar = () => {
                 Follow
             </Link>
           </Button> :
-          <Button className="rounded-xl shadow-lg text-xs cursor-none">
-              Ended {dayjs().to(data?.user.active_bundle_expire_at)}
-          </Button>}
+          <BundleDrawer/>}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -42,7 +38,7 @@ const Navbar = () => {
               className="relative rounded-full p-0 h-full"
             >
               <Avatar className="h-10 w-10">
-                <AvatarFallback>OL</AvatarFallback>
+                <AvatarFallback>{!!data?.user ? data.user.name.substring(0, 2) : 'UK'}</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
