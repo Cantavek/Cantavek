@@ -65,4 +65,9 @@ export const contactSchema = z.object({
   message: z.string()
 })
 
+export const sponsorSchema = z.object({
+  name: z.string(),
+  identity_link: z.string(),
+  link: z.string(),
+})
   

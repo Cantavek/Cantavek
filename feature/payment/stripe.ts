@@ -7,7 +7,7 @@ const stripe = new Stripe(
 type Bundle = {
   name: string
   price: number
-  description: string
+  description?: string
 }
 
 export const createStripeSession = async (bundle: Bundle, client_reference_id: string) => {

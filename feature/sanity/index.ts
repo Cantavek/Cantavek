@@ -87,6 +87,22 @@ export type Page = {
   }
 }
 
+export type BookingType = {
+  _id: string;
+  name: string;
+  duration: string
+  duration_count: string;
+  price_gdes: number;
+  price_usd: number;
+}
+
+export type Sponsoring = {
+  _id: string;
+  name: string;
+  description: string;
+  price_gdes: number
+  price_usd: number;
+}
 
 export const getAllBundle = async () => {
   return client.fetch<Bundle[]>(`*[_type == "bundle"] | order(_createdAt asc){
@@ -199,4 +215,42 @@ export const getHomePageData = () => {
       link
     }
   }`)
+}
+
+export const getBookingType = () => {
+  return client.fetch<BookingType[]>(`*[_type == "booking-type"]{
+    _id,
+    name,
+    duration,
+    duration_count,
+    price_gdes,
+    price_usd,
+  }`)
+}
+
+export const getSponsorTypes = () => {
+  return client.fetch<Sponsoring[]>(`*[_type == "sponsoring"]{
+    _id,
+    name,
+    description,
+    price_gdes,
+    price_usd
+  }`)
+}
+
+export const getSponsorType = (id: string) => {
+  return client.fetch<Sponsoring>(`*[_type == "sponsoring" && _id == $id][0]{
+    _id,
+    name,
+    description,
+    price_gdes,
+    price_usd
+  }`, { id })
+}
+
+export const getSponsor = (id: string) => {
+  return client.fetch<{ _id: string, name: string}>(`*[_type == "sponsor" && _id == $id][0]{
+    _id,
+    name,
+  }`, { id })
 }

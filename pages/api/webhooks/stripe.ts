@@ -1,5 +1,5 @@
 import { stripe } from '@/feature/payment';
-import { client, getBundle, getUserByEmail } from '@/feature/sanity';
+import { client, getBundle, getSponsor, getSponsorType, getUserByEmail } from '@/feature/sanity';
 import dayjs from 'dayjs';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { buffer } from 'stream/consumers';
@@ -38,33 +38,43 @@ export default async function handler(
           id: string;
         };
         const referenceId = session.client_reference_id.split('/');
-        const bundleId = referenceId[1]
+        const itemId = referenceId[1]
         const userEmail = referenceId[2]
+        const paymentType = referenceId[3]
 
         const user = await getUserByEmail(userEmail)
-        const bundle = await getBundle(bundleId)
+       
 
-        if(!!user && !!bundle) {
-          const expire_at = dayjs().add(bundle.duration, 'months').toISOString();
+        if(!!user) {
+          if(paymentType === 'payment') {
+            const bundle = await getBundle(itemId)
+            const expire_at = dayjs().add(bundle.duration, 'months').toISOString();
 
-          const userPatch = client
-            .patch(user._id)
-            .set({ 
-              active_bundle: { _ref: bundleId, _type: 'reference' },
-              active_bundle_expire_at: expire_at
-            });
+            const userPatch = client
+              .patch(user._id)
+              .set({ 
+                active_bundle: { _ref: bundle._id, _type: 'reference' },
+                active_bundle_expire_at: expire_at
+              });
 
-          client
-            .transaction().patch(userPatch).create({
-              _type: 'purchase',
-              user: { _ref: user._id, _type: 'reference'}, 
-              bundle: { _ref: bundleId, _type: 'reference'}, 
-              expire_at
-            })
-            .commit()
-            .then(() => {
-              console.log('Whole lot of stuff just happened')
-            })
+            client
+              .transaction().patch(userPatch).create({
+                _type: 'purchase',
+                user: { _ref: user._id, _type: 'reference'}, 
+                bundle: { _ref: bundle._id, _type: 'reference'}, 
+                expire_at
+              })
+              .commit()
+              .then(() => {
+                console.log('Whole lot of stuff just happened')
+              })
+          }
+          if(paymentType === 'sponsor'){
+            const sponsor = await getSponsor(itemId)
+            
+            client.patch(sponsor._id).set({ payed: true }).commit()
+          }
+
         }
         // Then define and call a function to handle the event invoice.payment_succeeded
         break;

@@ -37,7 +37,7 @@ const PaymentForm = ({ bundles}: { bundles: Bundle[] }) => {
       try{
         const res = await fetch(`/api/pay/${data.payment_type}`,{
           method: 'POST',
-          body: JSON.stringify({ bundle: data.bundle })
+          body: JSON.stringify({ type: 'payment', itemId: data.bundle })
         })
         setLoading(false)
         if(res.status === 200) {

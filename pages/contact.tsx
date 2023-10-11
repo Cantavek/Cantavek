@@ -1,10 +1,15 @@
 import ContactForm from '@/components/forms/contact-form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { getBookingType } from '@/feature/sanity'
 import Layout from '@/layouts'
-import React from 'react'
+import { InferGetStaticPropsType } from 'next'
 
-const Contact = () => {
+export async function getStaticProps() {
+  const data = await getBookingType()
+
+  return { props: { data } }
+}
+
+const Contact = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
       <div className="">
@@ -26,7 +31,7 @@ const Contact = () => {
       <div id="contact" className="md:pt-6 border-b border-gray-100 dark:border-gray-800">
         <div className="mx-auto mb-16 px-6  md:max-w-2xl lg:max-w-5xl lg:px-12">
           <div className="mt-10 mx-auto lg:w-3/5">
-            <ContactForm/>
+            <ContactForm data={data}/>
           </div>
         </div>
       </div>

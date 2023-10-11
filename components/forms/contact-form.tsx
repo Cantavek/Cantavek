@@ -10,10 +10,11 @@ import { useToast } from '../ui/use-toast'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import Spinner from '../svgs/spinner'
+import { BookingType } from '@/feature/sanity'
 
 type Inputs = z.infer<typeof contactSchema>
 
-const ContactForm = () => {
+const ContactForm = ({ data }: { data: BookingType[] }) => {
   const { toast } = useToast()
   const [loading, setLoading] = useState(false)
 
@@ -42,7 +43,7 @@ const ContactForm = () => {
         }) 
       }
       toast({
-        description: "Your request have been sent successfully we will contact you soon",
+        description: "Your request have been sent successfully we will contact you soon.",
         variant: 'default',
       }) 
     }
@@ -83,13 +84,13 @@ const ContactForm = () => {
             name="name"
             render={({ field }) => (
             <FormItem>
-              <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="email">
+              <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="name">
                 What&apos;s your name ?
               </label>
               <FormControl>
               <Input
               className='w-full px-5 py-6 rounded-3xl' 
-              placeholder="Your email" 
+              placeholder="Your name" 
               required
               {...field}
               />
@@ -132,10 +133,18 @@ const ContactForm = () => {
                   <SelectValue placeholder="Select a budjet" />   
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="$500 - $1500">$500 - $1500</SelectItem>
-                  <SelectItem value="$1500 - $5000">$1500 - $5000</SelectItem>
-                  <SelectItem value="$5000 - $10.000">$5000 - $10.000</SelectItem>
-                  <SelectItem value="$10.000 - Beyond">$10.000 - Beyond</SelectItem>
+                  {data.map((booking) => (
+                    <SelectItem value={booking._id} key={booking._id}>
+                      <div className='flex flex-col items-start'>
+                        <span className='font-semibold text-sm text-gray-700'>
+                          {booking.duration} {booking.duration_count}
+                        </span>
+                        <span className='text-gray-700'>
+                        for (${booking.price_usd} ou {booking.price_gdes} HTG)
+                        </span>
+                      </div>
+                    </SelectItem>
+                  ))}
                 </SelectContent>
             </Select>
           </FormItem>
@@ -145,7 +154,7 @@ const ContactForm = () => {
         <div className="space-y-2">
           <FormField
           control={form.control}
-          name="name"
+          name="message"
           render={({ field }) => (
           <FormItem>
             <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="contact_form_message">Message</label>

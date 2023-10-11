@@ -9,6 +9,20 @@ export default defineType({
 
   fields: [
     defineField({
+      name: 'created',
+      title: 'Created',
+      type: 'boolean',
+      validation: Rule => Rule.required(),
+      initialValue: false
+    }),
+    defineField({
+      name: 'payed',
+      title: 'Payed',
+      type: 'boolean',
+      validation: Rule => Rule.required(),
+      initialValue: false
+    }),
+    defineField({
       name: 'name',
       title: 'Name',
       type: 'string',
@@ -21,7 +35,11 @@ export default defineType({
       options: {
         hotspot: true
       },
-      validation: Rule => Rule.required()
+    }),
+    defineField({
+      name: 'identity_link',
+      title: 'Identity Link (logo or a profile phote)',
+      type: 'string',
     }),
     defineField({
       name: 'link',
@@ -36,6 +54,12 @@ export default defineType({
       type: 'reference',
       to: { type: 'sponsoring' },
       readOnly: true,
+    }),
+    defineField({
+      name: 'transactionId',
+      title: 'Transaction ID',
+      type: 'string',
+      readOnly: true
     }),
   ]
 })

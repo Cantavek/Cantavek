@@ -22,7 +22,13 @@ export default defineField({
     defineField({
       name: 'expire_at',
       type: 'datetime',
-    })
+    }),
+    defineField({
+      name: 'transactionId',
+      title: 'Transaction ID',
+      type: 'string',
+      readOnly: true
+    }),
   ],
   preview: {
     select: {    

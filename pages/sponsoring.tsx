@@ -1,11 +1,20 @@
-import { Button } from '@/components/ui/button'
+import SponsorCreatedDialog from '@/components/sponsor-created-dialog'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { getSponsorTypes } from '@/feature/sanity'
 import Layout from '@/layouts'
-import Link from 'next/link'
+import { InferGetStaticPropsType } from 'next'
 import { useState } from 'react'
 
-const Sponsoring = () => {
+export async function getStaticProps() {
+  const data = await getSponsorTypes()
+
+  return { props: { data } }
+}
+
+
+const Sponsoring = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [currency, setCurrency] = useState('usd')
+
   return (
     <Layout>
       <div className='pb-20 pt-16'>
@@ -31,86 +40,30 @@ const Sponsoring = () => {
           <section className="w-full flex items-center justify-center">
             <div className="container px-4 md:px-6">
               <div className="flex overflow-y-hidden overflow-x-scroll py-4 scrollbar-none space-x-3 pb-4">
-                <div className={"relative flex flex-col min-w-[18rem] max-w-[18rem] bg-white shadow-lg rounded-2xl justify-between border hover:border-[#be148e]"}>
-                  <div className='h-28 bg-[#be148e] relative rounded-t-2xl'>
-                    <div className='bg-white rounded-md px-3 py-1 text-gray-700 absolute bottom-2 left-2 text-sm font-semibold'>
-                      Menbership
+                {data.map((sponsorType) => (
+                  <div className={"relative flex flex-col min-w-[18rem] max-w-[18rem] bg-white shadow-lg rounded-2xl justify-between border hover:border-[#be148e]"}
+                  key={sponsorType._id}
+                  >
+                    <div className='h-28 bg-[#be148e] relative rounded-t-2xl'>
+                      <div className='bg-white rounded-md px-3 py-1 text-gray-700 absolute bottom-2 left-2 text-sm font-semibold'>
+                        Menbership
+                      </div>
+                    </div>
+                      <div className='w-full pt-5 pb-12 pl-6'>
+                      <h2 className="text-xl font-bold pb-3">{sponsorType.name}</h2>
+                      <p className='text-gray-700 text-sm'>{sponsorType.description}</p>
+                      
+                    </div>
+                    <div className="mt-6 w-full p-6">
+                      <div className='pb-5'>
+                        <span className="text-4xl font-bold">
+                          {currency === 'usd' ? `$${sponsorType.price_usd}` : `${sponsorType.price_gdes} HTG`}
+                        </span>
+                      </div>
+                      <SponsorCreatedDialog currency={currency} sponsorTypeId={sponsorType._id}/>
                     </div>
                   </div>
-                    <div className='w-full pt-5 pb-12 pl-6'>
-                    <h2 className="text-xl font-bold pb-3">Sponsor</h2>
-                    <p className='text-gray-700 text-sm'>Individual sponsor</p>
-                    
-                  </div>
-                  <div className="mt-6 w-full p-6">
-                    <div className='pb-5'>
-                      <span className="text-4xl font-bold">$25</span>
-                      {/* <span>for 6 months</span> */}
-                    </div>
-                    <Button 
-                    asChild
-                    className={"w-full bg-[#be148e] rounded-3xl py-5"}>
-                      <Link href='/'>
-                        Sponsor us!
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className={"relative flex flex-col min-w-[18rem] max-w-[18rem] bg-white shadow-lg rounded-2xl justify-between border hover:border-[#be148e]"}>
-                  <div className='h-28 bg-[#be148e] relative rounded-t-2xl'>
-                    <div className='bg-white rounded-md px-3 py-1 text-gray-700 absolute bottom-2 left-2 text-sm font-semibold'>
-                      Menbership
-                    </div>
-                  </div>
-                    <div className='w-full pt-5 pb-12 pl-6'>
-                    <h2 className="text-xl font-bold pb-3">Bronze Sponsor 🥉</h2>
-                    <p className='text-gray-700 text-sm'>
-                      Be a bronze sponsor with a monthly donation of $100 and get your logo on our repository and website.
-                    </p>
-                    
-                  </div>
-                  <div className="mt-6 w-full p-6">
-                    <div className='pb-5'>
-                      <span className="text-4xl font-bold">$100</span>
-                      {/* <span>for 6 months</span> */}
-                    </div>
-                    <Button 
-                    asChild
-                    className={"w-full bg-[#be148e] rounded-3xl py-5"}>
-                      <Link href='/'>
-                        Sponsor us!
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                <div className={"relative flex flex-col min-w-[18rem] max-w-[18rem] bg-white shadow-lg rounded-2xl justify-between border hover:border-[#be148e]"}>
-                  <div className='h-28 bg-[#be148e] relative rounded-t-2xl'>
-                    <div className='bg-white rounded-md px-3 py-1 text-gray-700 absolute bottom-2 left-2 text-sm font-semibold'>
-                      Menbership
-                    </div>
-                  </div>
-                    <div className='w-full pt-5 pb-12 pl-6'>
-                    <h2 className="text-xl font-bold pb-3">Silver Sponsor 🥈</h2>
-                    <p className='text-gray-700 text-sm'>
-                      Be a silver sponsor with a monthly donation of $500 and get your logo on our repository and website.
-                    </p>
-                    
-                  </div>
-                  <div className="mt-6 w-full p-6">
-                    <div className='pb-5'>
-                      <span className="text-4xl font-bold">$10</span>
-                      {/* <span>for 6 months</span> */}
-                    </div>
-                    <Button 
-                    asChild
-                    className={"w-full bg-[#be148e] rounded-3xl py-5"}>
-                      <Link href='/'>
-                        Sponsor us!
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                
+                ))}
               </div>
             </div>
           </section>
