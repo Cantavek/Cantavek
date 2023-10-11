@@ -12,14 +12,12 @@ export default defineType({
       name: 'created',
       title: 'Created',
       type: 'boolean',
-      validation: Rule => Rule.required(),
       initialValue: false
     }),
     defineField({
       name: 'payed',
       title: 'Payed',
       type: 'boolean',
-      validation: Rule => Rule.required(),
       initialValue: false
     }),
     defineField({

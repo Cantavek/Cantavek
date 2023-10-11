@@ -47,6 +47,7 @@ export default async function handler(
             client
               .transaction().patch(userPatch).create({
                 _type: 'purchase',
+                transactionId: req.query.transactionId,
                 user: { _ref: user._id, _type: 'reference'}, 
                 bundle: { _ref: bundle._id, _type: 'reference'}, 
                 expire_at
@@ -58,7 +59,7 @@ export default async function handler(
           }
           if(paymentType === 'sponsor'){
             const sponsor = await getSponsor(itemId);
-            client.patch(sponsor._id).set({ payed: true })
+            client.patch(sponsor._id).set({ payed: true, transactionId: req.query.transactionId })
           }
         }
     

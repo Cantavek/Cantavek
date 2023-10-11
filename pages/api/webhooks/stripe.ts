@@ -1,5 +1,5 @@
 import { stripe } from '@/feature/payment';
-import { client, getBundle, getSponsor, getSponsorType, getUserByEmail } from '@/feature/sanity';
+import { client, getBundle, getSponsor, getUserByEmail } from '@/feature/sanity';
 import dayjs from 'dayjs';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { buffer } from 'stream/consumers';
@@ -43,7 +43,6 @@ export default async function handler(
         const paymentType = referenceId[3]
 
         const user = await getUserByEmail(userEmail)
-       
 
         if(!!user) {
           if(paymentType === 'payment') {
@@ -60,6 +59,7 @@ export default async function handler(
             client
               .transaction().patch(userPatch).create({
                 _type: 'purchase',
+                transactionId: session.id,
                 user: { _ref: user._id, _type: 'reference'}, 
                 bundle: { _ref: bundle._id, _type: 'reference'}, 
                 expire_at
@@ -71,8 +71,7 @@ export default async function handler(
           }
           if(paymentType === 'sponsor'){
             const sponsor = await getSponsor(itemId)
-            
-            client.patch(sponsor._id).set({ payed: true }).commit()
+            client.patch(sponsor._id).set({ payed: true, transactionId: session.id }).commit()
           }
 
         }

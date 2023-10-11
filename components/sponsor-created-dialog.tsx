@@ -36,7 +36,7 @@ const SponsorCreatedDialog = ({ currency, sponsorTypeId }: { currency: string, s
       console.log(data)
       setLoading(true)
       try{
-        const res = await fetch(`/api/pay/${currency === 'usd' ? 'moncash' : 'stripe'}`,{
+        const res = await fetch(`/api/pay/${currency === 'usd' ? 'stripe' : 'moncash'}`,{
           method: 'POST',
           body: JSON.stringify({ type: 'sponsor', itemId: sponsorTypeId, ...data })
         })
