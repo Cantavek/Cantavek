@@ -54,4 +54,15 @@ export const paymentSchema = z.object({
   payment_type: z.enum(['moncash', 'stripe']),
 })
 
+
+export const contactSchema = z.object({
+  name: z.string(),
+  email: z.string().email({
+    message: "Please enter a valid email address",
+  }),
+  phonenumber: z.string(),
+  budget: z.string(),
+  message: z.string()
+})
+
   

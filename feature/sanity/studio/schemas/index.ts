@@ -18,9 +18,12 @@ import purchase from './documents/purchase'
 import video from './documents/video'
 import sponsoringType from './documents/sponsoring-type'
 import sponsors from './documents/sponsors'
+import bookingType from './documents/booking-type'
+import booking from './documents/booking'
 
 const documents = [
-  user, account, video, bundle, page, purchase, sponsoringType, sponsors
+  user, account, video, bundle, page, purchase, sponsoringType, sponsors,
+  bookingType, booking
 ]
 
 // Singleton document types

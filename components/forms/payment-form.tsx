@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import { CheckCircledIcon } from '@radix-ui/react-icons'
 import CreditCardSvg from '../svgs/credit-card-svg'
 import { z } from 'zod'
-import { paymentSchema } from '@/validations/auth'
+import { paymentSchema } from '@/validations'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
@@ -61,7 +61,7 @@ const PaymentForm = ({ bundles}: { bundles: Bundle[] }) => {
           <FormField
           control={form.control}
           name="bundle"
-          render={({ field, formState }) => (
+          render={({ field }) => (
             <FormItem>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger className="w-full h-full">

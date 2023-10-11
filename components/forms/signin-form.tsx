@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { PasswordInput } from "@/components/password-input"
-import { signInSchema } from "@/validations/auth";
+import { signInSchema } from "@/validations";
 import { useEffect, useState } from "react";
 import Spinner from "../svgs/spinner";
 import { signIn, useSession } from 'next-auth/react';
