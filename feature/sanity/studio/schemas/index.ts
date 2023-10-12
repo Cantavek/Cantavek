@@ -44,6 +44,7 @@ import seoPage from './objects/seo/page'
 import seoDescription from './objects/seo/description'
 import teamVariant from './objects/teamVariant'
 import sectionVariant from './objects/section-variant'
+import featureVariant from './objects/featureVariant'
 
 const objects = [
   seo,
@@ -51,7 +52,8 @@ const objects = [
   seoPage,
   seoDescription,
   teamVariant,
-  sectionVariant
+  sectionVariant,
+  featureVariant
 ]
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]

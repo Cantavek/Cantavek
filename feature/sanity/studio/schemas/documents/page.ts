@@ -6,12 +6,6 @@ export default defineField({
   title: 'Page',
   type: 'document',
   icon: DocumentIcon,
-  groups: [
-    {
-      name: 'seo',
-      title: 'SEO',
-    },
-  ],
   fields: [
     // Title
     defineField({
@@ -41,14 +35,6 @@ export default defineField({
       title: 'Body',
       description: 'All text you want to add in this page',
       type: 'body',
-      validation: Rule => Rule.required()
-    }),
-    // SEO
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo.page',
-      group: 'seo',
       validation: Rule => Rule.required()
     }),
   ],

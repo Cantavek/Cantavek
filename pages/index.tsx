@@ -10,14 +10,13 @@ import { InferGetStaticPropsType } from 'next'
 
 export const getStaticProps = async () => {
   const data = await getHomePageData()
-
   const sponsors = await getSponsors()
 
   return { props: { data, sponsors } }
 }
 
 export default function Home({ data, sponsors }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // console.log(data, 'data')
+
   return (
     <Layout showVideoButton={true}>
       <div className='pt-[4rem]'>
@@ -25,7 +24,7 @@ export default function Home({ data, sponsors }: InferGetStaticPropsType<typeof 
           <HeroSlider images={data.hero}/>
         </div>
         <Section1 data={data.section_1}/>
-        <Feature/>
+        <Feature data={data.feature}/>
         <Section2 data={data.section_2}/>
         <Sponsors sponsors={sponsors}/>
         <Teams team={data.team}/>

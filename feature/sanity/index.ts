@@ -38,6 +38,16 @@ export type Home = {
     image: string;
     call_to_action: string;
   },
+  feature: {
+    title: string;
+    description: string;
+    image: string;
+    features: {
+      title: string;
+      description: string;
+      icon: string;
+    }[]
+  },
   section_2: {
     title: string;
     description: string;
@@ -211,6 +221,16 @@ export const getHomePageData = () => {
       description,
       "image": image.asset->url,
       "call_to_action": call_to_action[0]
+    },
+    feature{
+      title,
+      description,
+      "image": image.asset->url,
+      "features": features[]{
+        title,
+        description,
+        "icon": icon[0]
+      }
     },
     "section_2": section_2{
       title,

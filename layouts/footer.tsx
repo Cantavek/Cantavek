@@ -44,11 +44,11 @@ const Footer = () => {
                     About
                   </Link>
                 </div>
-                {/* <div>
-                  <Link href="/about" className="text-base font-medium text-gray-600 dark:text-gray-200">
+                <div>
+                  <Link href="/contact" className="text-base font-medium text-gray-600 dark:text-gray-200">
                     Contact
                   </Link>
-                </div> */}
+                </div>
                 <div>
                   <Link href="/privacy" className="text-base font-medium text-gray-600 dark:text-gray-200">
                     Privacy policy

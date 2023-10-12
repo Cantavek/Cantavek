@@ -34,10 +34,10 @@ const Section2 = ({ data }: { data: Home['section_2'] }) => {
                 <Link href={`/${data.call_to_action}`}>
                   {data.call_to_action === 'follow' ? 
                   <HeartIcon width={20} height={20} strokeWidth={2} className='mr-2'/> : 
-                  data.call_to_action === 'video' ? 
+                  data.call_to_action === 'videos' ? 
                   <VideoIcon width={20} height={20} strokeWidth={2} className='mr-2'/> : 
                   <BookmarkIcon width={20} height={20} strokeWidth={2} className='mr-2'/>}
-                  {data.call_to_action === 'follow' ? 'Follow' : data.call_to_action === 'video' ? 'See videos' : 'Sponsor us!'}
+                  {data.call_to_action === 'follow' ? 'Follow' : data.call_to_action === 'videos' ? 'See videos' : 'Sponsor us!'}
                 </Link>
               </Button>
             </div>

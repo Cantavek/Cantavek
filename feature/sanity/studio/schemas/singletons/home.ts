@@ -24,11 +24,7 @@ export default defineField({
     {
       name: 'sponsors',
       title: 'Sponsors',
-    },
-    {
-      name: 'seo',
-      title: 'SEO',
-    },
+    }
   ],
   fields: [
     // Hero
@@ -43,6 +39,12 @@ export default defineField({
         },
       }],
       group: 'hero',
+    }),
+    defineField({
+      name: 'feature',
+      title: 'Feature',
+      type: 'featureVariant',
+      group: 'section',
     }),
     defineField({
       name: 'section_1',
@@ -63,13 +65,6 @@ export default defineField({
       type: 'array',
       of: [{ type: 'teamVariant'}],
       group: 'team',
-    }),
-    // SEO
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo.home',
-      group: 'seo',
     }),
   ],
   preview: {
