@@ -7,7 +7,7 @@ import Image from 'next/image'
 import React from 'react'
 
 export const getStaticProps = async () => {
-  const data = await getPage('Privacy Policy')
+  const data = await getPage('Privacy Policy Page')
 
   return { props: { data } }
 }

@@ -1,14 +1,3 @@
-// Rich text annotations used in the block content editor
-import annotationLinkEmail from './annotations/linkEmail'
-import annotationLinkExternal from './annotations/linkExternal'
-// import annotationLinkInternal from './annotations/linkInternal'
-
-const annotations = [
-  annotationLinkEmail,
-  annotationLinkExternal,
-  // annotationLinkInternal,
-]
-
 // Document types
 import page from './documents/page'
 import user from './documents/user'
@@ -38,22 +27,14 @@ import body from './blocks/body'
 const blocks = [body]
 
 // Object types
-import seo from './objects/seo/seo'
-import seoHome from './objects/seo/home'
-import seoPage from './objects/seo/page'
-import seoDescription from './objects/seo/description'
 import teamVariant from './objects/teamVariant'
 import sectionVariant from './objects/section-variant'
 import featureVariant from './objects/featureVariant'
 
 const objects = [
-  seo,
-  seoHome,
-  seoPage,
-  seoDescription,
   teamVariant,
   sectionVariant,
   featureVariant
 ]
 
-export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]
+export const schemaTypes = [...singletons, ...objects, ...blocks, ...documents]
