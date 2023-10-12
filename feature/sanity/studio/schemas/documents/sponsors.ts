@@ -41,7 +41,7 @@ export default defineType({
     }),
     defineField({
       name: 'link',
-      title: 'Link',
+      title: 'Link (website or a social media link)',
       type: 'string',
       validation: Rule => Rule.required()
     }),

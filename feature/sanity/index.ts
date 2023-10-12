@@ -1,16 +1,11 @@
 import { createClient } from "next-sanity";
 import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-// import type {QueryParams} from '@sanity/client'
-
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID 
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2023-06-20'
 export const SanityToken = process.env.SECRET_SANITY_VIEW_TOKEN
-
-
-// npm i @portabletext/react @sanity/image-url
 
 export const client = createClient({
   projectId,
@@ -36,11 +31,19 @@ export type User = {
 }
 
 export type Home = {
-  seo: {
-    title: string,
-    description: string,
-    image: string,
-  }[],
+  hero: string[],
+  section_1: {
+    title: string;
+    description: string;
+    image: string;
+    call_to_action: string;
+  },
+  section_2: {
+    title: string;
+    description: string;
+    image: string;
+    call_to_action: string;
+  }
   team: {
     name: string,
     role: string,
@@ -49,11 +52,6 @@ export type Home = {
     twitter_link: string,
     linkedin_link: string
   }[],
-  sponsors:{
-    name: string,
-    logo: string,
-    link: string
-  }[]
 }
 
 export type Bundle = {
@@ -102,6 +100,15 @@ export type Sponsoring = {
   description: string;
   price_gdes: number
   price_usd: number;
+}
+
+export type Sponsor = {
+    _id: string;
+    name: string;
+    created: boolean;
+    payed: boolean;
+    logo: string;
+    link: string;
 }
 
 export const getAllBundle = async () => {
@@ -196,10 +203,20 @@ export const getPage = (title: string) => {
 
 export const getHomePageData = () => {
   return client.fetch<Home>(`*[_type == 'home'][0]{
-    "seo": seo{
+    "hero": hero[]{
+      "url": asset->url
+    }.url,
+    "section_1": section_1{
       title,
       description,
-      'image': image.asset->url,
+      "image": image.asset->url,
+      "call_to_action": call_to_action[0]
+    },
+    "section_2": section_2{
+      title,
+      description,
+      "image": image.asset->url,
+      "call_to_action": call_to_action[0]
     },
     "team": teams[]{
       name,
@@ -209,11 +226,6 @@ export const getHomePageData = () => {
       twitter_link,
       linkedin_link,
     },
-    "sponsors": list[]{
-      name,
-      "logo": logo.asset->url,
-      link
-    }
   }`)
 }
 
@@ -249,8 +261,19 @@ export const getSponsorType = (id: string) => {
 }
 
 export const getSponsor = (id: string) => {
-  return client.fetch<{ _id: string, name: string}>(`*[_type == "sponsor" && _id == $id][0]{
+  return client.fetch<Sponsor>(`*[_type == "sponsor" && _id == $id][0]{
     _id,
     name,
+    "logo": logo.asset->url,
+    link,
   }`, { id })
+}
+
+export const getSponsors = () => {
+  return client.fetch<Sponsor[]>(`*[_type == "sponsor" && created && logo != null][0...6]{
+    _id,
+    name,
+    "logo": logo.asset->url,
+    link,
+  }`)
 }

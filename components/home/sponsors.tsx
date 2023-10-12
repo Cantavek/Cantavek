@@ -1,9 +1,9 @@
-import { Home } from "@/feature/sanity"
+import { Sponsor } from "@/feature/sanity"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../ui/button"
 
-const Sponsors = ({ sponsors }: { sponsors: Home['sponsors']}) => {
+const Sponsors = ({ sponsors }: { sponsors: Sponsor[] }) => {
   return (
     <div className="py-8">
       <div className="sm:max-w-5xl pt-3 rounded-xl bg-white mx-4 sm:mx-8 md:mx-auto">
@@ -17,8 +17,11 @@ const Sponsors = ({ sponsors }: { sponsors: Home['sponsors']}) => {
         </div>
         <div className="flex flex-wrap justify-center items-center space-x-3">
           {sponsors.map((sponsor, i) => (
-            <div
+            <a
+            href={'/'}
             key={i}
+            target="_blank"
+            aria-label={`${sponsor.name} identity link`}
             className="w-3/12 sm:w-1/6 flex flex-col justify-center xl:pb-10 pb-8 items-center inset-0 transform  hover:scale-125 transition duration-300 contrast-75 hover:contrast-100 drop-shadow-xl">
               <Image 
               width={65} 
@@ -28,7 +31,7 @@ const Sponsors = ({ sponsors }: { sponsors: Home['sponsors']}) => {
               alt={sponsor.name} 
               role="img" />
               <span className='font-semibold text-center text-sm text-gray-600'>{sponsor.name}</span>
-            </div>
+            </a>
           ))}
         </div>
 

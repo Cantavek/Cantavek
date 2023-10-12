@@ -2,23 +2,24 @@ import React from 'react'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 import BlurImage from '../blur-image'
-import { HeartIcon } from '@radix-ui/react-icons'
+import { BookmarkIcon, HeartIcon, VideoIcon } from '@radix-ui/react-icons'
+import { Home } from '@/feature/sanity'
 
-const Section1 = () => {
+const Section1 = ({ data }: { data: Home['section_1'] }) => {
   return (
     <div className="py-8 md:py-12 bg-white">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-10 flex-wrap-reverse">
       <div className="mb-6 md:mb-12 order-1">
         <div className="block md:hidden">
           <h2 className="mb-6 font-normal text-2xl md:text-4xl leading-tight">
-          CANTAVE K COMEDY CLUB
+            {data.title}
           </h2>
         </div>
         <div className="align-top relative overflow-hidden flex items-center justify-center rounded-2xl">
           <BlurImage
             width={550}
             height={380}
-            src="/Cantekcomedyclub_93-min_50-scaled.jpg"
+            src={data.image}
             className="object-contain rounded-2xl"
             alt=""
           />
@@ -26,11 +27,11 @@ const Section1 = () => {
       </div>
       <div className="order-2">
         <h2 className="mb-6 font-normal text-2xl md:text-4xl leading-tight hidden md:block">
-        CANTAVE K COMEDY CLUB
+          {data.title}
         </h2>
         <div style={{ color: 'rgb(35, 36, 38)' }} className="text-lg">
           <p>
-          Près d’un an après sa grande tournée nationale « Follow Cantave K », l’humoriste Kerven Cantave, dit Cantave K, lance son propre « Comedy club ». Baptisé « Cantave K Comedy Club », la grande première inaugurale a eu lieu le samedi 10 juin 2023 à Café 36, Pétion-Ville.
+            {data.description}
           </p>
         </div>
         <div>
@@ -49,9 +50,13 @@ const Section1 = () => {
             size={'lg'}
             className="bg-main rounded-xl shadow-lg shadow-purple-500/50" 
             asChild>
-              <Link href={'/follow'}>
-                <HeartIcon width={20} height={20} strokeWidth={2} className='mr-2'/>
-                Follow
+              <Link href={`/${data.call_to_action}`}>
+                {data.call_to_action === 'follow' ? 
+                <HeartIcon width={20} height={20} strokeWidth={2} className='mr-2'/> : 
+                data.call_to_action === 'video' ? 
+                <VideoIcon width={20} height={20} strokeWidth={2} className='mr-2'/> : 
+                <BookmarkIcon width={20} height={20} strokeWidth={2} className='mr-2'/>}
+                {data.call_to_action === 'follow' ? 'Follow' : data.call_to_action === 'video' ? 'See videos' : 'Sponsor us!'}
               </Link>
             </Button>
           </div>

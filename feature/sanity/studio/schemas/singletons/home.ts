@@ -10,6 +10,14 @@ export default defineField({
   icon: HomeIcon,
   groups: [
     {
+      name: 'hero',
+      title: 'Hero',
+    },
+    {
+      name: 'section',
+      title: 'Section',
+    },
+    {
       name: 'team',
       title: 'Team',
     },
@@ -24,25 +32,37 @@ export default defineField({
   ],
   fields: [
     // Hero
-    // defineField({
-    //   name: 'hero',
-    //   title: 'Hero',
-    //   type: 'hero.home',
-    //   group: 'editorial',
-    // }),
+    defineField({
+      name: 'hero',
+      title: 'Hero',
+      type: 'array',
+      of: [{
+        type: 'image',
+        options: {
+          hotspot: true
+        },
+      }],
+      group: 'hero',
+    }),
+    defineField({
+      name: 'section_1',
+      title: 'Section 1',
+      type: 'sectionVariant',
+      group: 'section',
+    }),
+
+    defineField({
+      name: 'section_2',
+      title: 'Section 2',
+      type: 'sectionVariant',
+      group: 'section',
+    }),
     defineField({
       name: 'teams',
       title: 'Team list',
       type: 'array',
       of: [{ type: 'teamVariant'}],
       group: 'team',
-    }),
-    defineField({
-      name: 'list',
-      title: 'Sponsor list',
-      type: 'array',
-      of: [{ type: 'sponsorVariant'}],
-      group: 'sponsors',
     }),
     // SEO
     defineField({

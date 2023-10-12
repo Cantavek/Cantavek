@@ -4,28 +4,30 @@ import Section1 from '@/components/home/section-1'
 import Section2 from '@/components/home/section-2'
 import Sponsors from '@/components/home/sponsors'
 import Teams from '@/components/home/teams'
-import { getHomePageData } from '@/feature/sanity'
+import { getHomePageData, getSponsors } from '@/feature/sanity'
 import Layout from '@/layouts'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticProps = async () => {
   const data = await getHomePageData()
 
-  return { props: { data } }
+  const sponsors = await getSponsors()
+
+  return { props: { data, sponsors } }
 }
 
-export default function Home({ data }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ data, sponsors }: InferGetStaticPropsType<typeof getStaticProps>) {
   // console.log(data, 'data')
   return (
     <Layout showVideoButton={true}>
       <div className='pt-[4rem]'>
         <div className="pb-10">
-          <HeroSlider/>
+          <HeroSlider images={data.hero}/>
         </div>
-        <Section1/>
+        <Section1 data={data.section_1}/>
         <Feature/>
-        <Section2/>
-        <Sponsors sponsors={data.sponsors}/>
+        <Section2 data={data.section_2}/>
+        <Sponsors sponsors={sponsors}/>
         <Teams team={data.team}/>
       </div>
     </Layout>
