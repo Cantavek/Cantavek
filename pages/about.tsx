@@ -9,7 +9,7 @@ import Image from 'next/image'
 export async function getStaticProps() {
   const data = await getPage('About Page')
 
-  return { props: { data } }
+  return { props: { data }, revalidate: 14400 }
 }
 
 const About = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {

@@ -7,7 +7,7 @@ import { InferGetStaticPropsType } from 'next'
 export const getStaticProps = async () => {
   const bundles = await getAllBundle()
 
-  return { props: { bundles } }
+  return { props: { bundles }, revalidate: 14400 }
 }
 
 const Follow = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => {

@@ -9,7 +9,7 @@ import React from 'react'
 export const getStaticProps = async () => {
   const data = await getPage('Privacy Policy Page')
 
-  return { props: { data } }
+  return { props: { data }, revalidate: 14400 }
 }
 
 const Privacy = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {

@@ -6,7 +6,7 @@ import { InferGetStaticPropsType } from 'next'
 export async function getStaticProps() {
   const data = await getBookingType()
 
-  return { props: { data } }
+  return { props: { data }, revalidate: 14400 }
 }
 
 const Contact = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {

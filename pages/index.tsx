@@ -12,7 +12,7 @@ export const getStaticProps = async () => {
   const data = await getHomePageData()
   const sponsors = await getSponsors()
 
-  return { props: { data, sponsors } }
+  return { props: { data, sponsors },  revalidate: 14400 }
 }
 
 export default function Home({ data, sponsors }: InferGetStaticPropsType<typeof getStaticProps>) {

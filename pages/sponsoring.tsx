@@ -8,7 +8,7 @@ import { useState } from 'react'
 export async function getStaticProps() {
   const data = await getSponsorTypes()
 
-  return { props: { data } }
+  return { props: { data }, revalidate: 14400 }
 }
 
 
