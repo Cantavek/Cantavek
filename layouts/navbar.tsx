@@ -7,8 +7,9 @@ import Link from 'next/link'
 import { BookmarkIcon, EnterIcon, ExitIcon, HeartIcon, Link2Icon } from "@radix-ui/react-icons"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import Image from 'next/image';
-import { useSession,  signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import dynamic from 'next/dynamic';
+
 const BundleDrawer = dynamic(() => import('./bundle-drawer'))
 
 const Navbar = () => {

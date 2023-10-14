@@ -13,6 +13,7 @@ export const client = createClient({
   apiVersion,
   token: SanityToken,
   useCdn: false,
+  // useCdn: process.env.NODE_ENV === 'production'
   // perspective: 'published',
 })
 
