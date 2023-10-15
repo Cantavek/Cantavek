@@ -163,6 +163,7 @@ export const getVideos = () => {
     title,
     lock,
     'poster': poster.asset->url,
+    'teaser': teaser.asset->url,
     duration,
   }`)
 }

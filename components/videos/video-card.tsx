@@ -9,9 +9,10 @@ interface Props {
   lock?: boolean
   id: string;
   duration: string
+  hasTeaser: boolean
 }
 
-const VideoCard = ({ poster, title, id, lock = true, duration }: Props) => {
+const VideoCard = ({ poster, title, id, lock = true, duration, hasTeaser }: Props) => {
   return (
     <div>
       <div>
@@ -27,6 +28,11 @@ const VideoCard = ({ poster, title, id, lock = true, duration }: Props) => {
             <Button className='bg-main p-2 shadow-md h-auto rounded-full'>
               <LockClosedIcon strokeWidth={3}/>
             </Button>
+          </div>}
+          {hasTeaser && <div className='absolute top-4 left-2.5'>
+            <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-orange-500/90 text-white">
+                Teaser
+            </span>
           </div>}
           <div className='absolute bottom-3 right-2.5 bg-foreground text-background px-1.5 py-0.5 rounded text-sm'>
             <span>{duration}</span>
