@@ -23,6 +23,7 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
     defaultValues: {
       email: '',
       name: '',
+      address: '',
       budget: '',
       message: '',
     },
@@ -113,6 +114,27 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
               <Input
               className='w-full px-5 py-6 rounded-3xl'
               placeholder='Enter your full phonenumber'
+              required
+              {...field}
+              />
+            </FormControl>
+          </FormItem>
+          )}
+          />
+        </div>
+        <div className="space-y-2">
+          <FormField
+          control={form.control}
+          name="address"
+          render={({ field }) => (
+          <FormItem>
+            <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="address">
+              What&apos;s the address of the spectacle ?
+            </label>
+            <FormControl>
+              <Input
+              className='w-full px-5 py-6 rounded-3xl'
+              placeholder='Enter the full address'
               required
               {...field}
               />

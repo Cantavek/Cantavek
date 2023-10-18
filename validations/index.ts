@@ -61,6 +61,7 @@ export const contactSchema = z.object({
     message: "Please enter a valid email address",
   }),
   phonenumber: z.string(),
+  address: z.string(),
   budget: z.string(),
   message: z.string()
 })
