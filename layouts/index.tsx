@@ -11,7 +11,9 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['300', '400', '500', '600
 const Layout = ({ children, showVideoButton = false }: { children: ReactNode, showVideoButton?: boolean }) => {
   return (
     <div className={`relative flex min-h-screen flex-col overflow-hidden ${poppins.className}`}>
-      <Navbar/>
+      <div>
+        <Navbar/>
+      </div>
       <main className="flex-1 relative">
         {children}
         {showVideoButton && 

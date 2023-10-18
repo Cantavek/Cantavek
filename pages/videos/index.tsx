@@ -35,7 +35,6 @@ const Videos = ({ videos }: InferGetServerSidePropsType<typeof getServerSideProp
     return true;
   }, [data?.user])
 
-  console.log(videos, 'videos')
   return (
     <Layout>
       <div className='pb-20 pt-24 md:container mx-3'>
