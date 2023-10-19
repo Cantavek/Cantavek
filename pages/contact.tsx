@@ -11,7 +11,7 @@ export async function getStaticProps() {
 
 const Contact = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <Layout>
+    <Layout showVideoButton={true}>
       <div className="">
         <div className="relative z-10 w-full">
           <div className="relative mx-auto pt-16 mb-16 px-6 md:max-w-2xl lg:max-w-5xl lg:px-12">

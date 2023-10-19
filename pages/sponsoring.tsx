@@ -16,7 +16,7 @@ const Sponsoring = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) =>
   const [currency, setCurrency] = useState('usd')
 
   return (
-    <Layout>
+    <Layout showVideoButton={true}>
       <div className='pb-20 pt-16'>
         <div className='max-w-6xl mx-auto'>
           <div className='mx-4 pt-12 pb-3'>
