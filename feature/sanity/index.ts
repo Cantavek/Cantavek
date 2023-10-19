@@ -143,6 +143,15 @@ export const getBundle = async (id: string) => {
   }`, {id})
 } 
 
+export const getFaqs = async () =>  {
+  return client.fetch<{ _key: string, question: string, answer: string }[]>(`*[_type == "settings"][0]{
+    "faqs": faqs[]{
+      _key,
+      question,
+      answer
+    }
+  }.faqs`)
+}
 export const getUserByEmail = async (email: string) => {
   return client.fetch<User>(`*[_type == "user" && email == $email][0]{
     _id,

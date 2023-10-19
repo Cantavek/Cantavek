@@ -1,16 +1,17 @@
 import Pricing from '@/components/pricing'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { getAllBundle } from '@/feature/sanity'
+import { getAllBundle, getFaqs } from '@/feature/sanity'
 import Layout from '@/layouts'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticProps = async () => {
   const bundles = await getAllBundle()
+  const faqs = await getFaqs()
 
-  return { props: { bundles }, revalidate: 14400 }
+  return { props: { bundles, faqs }, revalidate: 14400 }
 }
 
-const Follow = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Follow = ({ bundles, faqs }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
       <div className='pb-20 pt-24'>
@@ -33,25 +34,14 @@ const Follow = ({ bundles }: InferGetStaticPropsType<typeof getStaticProps>) => 
         <div className='max-w-4xl mx-4 md:mx-auto pt-20'>
           <h2 className='text-center text-5xl font-bold pb-2'>FAQs</h2>
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Is it accessible?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It adheres to the WAI-ARIA design pattern.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>Is it styled?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It comes with default styles that matches the other
-                components&apos; aesthetic.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>Is it animated?</AccordionTrigger>
-              <AccordionContent>
-                Yes. It&apos;s animated by default, but you can disable it if you prefer.
-              </AccordionContent>
-            </AccordionItem>
+            {faqs.map((faq) => (
+              <AccordionItem value={faq._key} key={faq._key}>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent>
+                  {faq.question}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
       </div>
       </div>

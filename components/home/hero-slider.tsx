@@ -17,7 +17,7 @@ const HeroSlider = ({ images }: { images: string[] }) => {
         <div className="h-auto md:h-[27rem] w-full" key={i}>
           <Image 
           src={image}
-          width={1240}
+          width={1380}
           height={512} 
           className="object-cover bg-skeleton"
           priority

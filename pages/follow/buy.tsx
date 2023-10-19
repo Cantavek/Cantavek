@@ -12,7 +12,7 @@ export type Section = 'login' | 'register' | 'pay';
 
 export const getStaticProps = (async () => {
   const bundles = await getAllBundle()
-
+  
   return { props: { bundles } }
 }) satisfies GetStaticProps
 
