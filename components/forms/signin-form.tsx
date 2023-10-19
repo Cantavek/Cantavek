@@ -50,12 +50,12 @@ const SignInForm = ({ handleSubmit, nextSection }: { handleSubmit: (section: any
         email: data.email,
         password: data.password
       });
-      console.log(signInReponse, 'signinResponse')
+
       if(signInReponse?.ok) handleSubmit(nextSection)
 
       if(!signInReponse?.ok) {
         toast({
-          description: signInReponse?.error,
+          description: "Email or password incorrect or this account not please follow Cantavek to have a account",
           variant: 'destructive',
         }) 
       }

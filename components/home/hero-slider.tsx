@@ -5,7 +5,7 @@ const HeroSlider = ({ images }: { images: string[] }) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 600,
     autoplay: true,
     slidesToShow: 1,
     slidesToScroll: 1
@@ -17,7 +17,7 @@ const HeroSlider = ({ images }: { images: string[] }) => {
         <div className="h-auto md:h-[27rem] w-full" key={i}>
           <Image 
           src={image}
-          width={1300}
+          width={1240}
           height={512} 
           className="object-cover bg-skeleton"
           priority

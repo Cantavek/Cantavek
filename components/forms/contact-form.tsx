@@ -64,13 +64,15 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="name">
+                <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="email">
                   What&apos;s your email ?
                 </label>
                 <FormControl>
                 <Input
+                id="email"
                 className='w-full px-5 py-6 rounded-3xl' 
                 placeholder="Your email" 
+                type="email"
                 required
                 {...field}
                 />
@@ -90,6 +92,7 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
               </label>
               <FormControl>
               <Input
+              id="name"
               className='w-full px-5 py-6 rounded-3xl' 
               placeholder="Your name" 
               required
@@ -107,11 +110,12 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
           name="phonenumber"
           render={({ field }) => (
           <FormItem>
-            <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="email">
+            <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="phonenumber">
               What&apos;s your phonenumber ?
             </label>
             <FormControl>
               <Input
+              id="phonenumber"
               className='w-full px-5 py-6 rounded-3xl'
               placeholder='Enter your full phonenumber'
               required
@@ -133,6 +137,7 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
             </label>
             <FormControl>
               <Input
+              id="address"
               className='w-full px-5 py-6 rounded-3xl'
               placeholder='Enter the full address'
               required
@@ -149,7 +154,9 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
           name="budget"
           render={({ field }) => (
             <FormItem>
-              <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="contact_form_budget">Budget</label>
+              <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="budget">
+                Budget
+              </label>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger className="w-full h-full px-5 py-4 rounded-3xl">
                   <SelectValue placeholder="Select a budjet" />   
@@ -179,9 +186,12 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
           name="message"
           render={({ field }) => (
           <FormItem>
-            <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="contact_form_message">Message</label>
+            <label className="block mb-2 text-gray-600 dark:text-gray-300 required" htmlFor="message">
+              Message
+            </label>
             <FormControl>
               <Textarea
+              id="message"
               required 
               rows={10}
               placeholder="Feel free to include all details"
@@ -194,15 +204,17 @@ const ContactForm = ({ data }: { data: BookingType[] }) => {
           />
           
         </div>
-        <Button className='h-11 px-6 rounded-full w-full md:w-auto' disabled={loading} >
-          {loading && (
-            <Spinner
-              className="mr-2 h-4 w-4 animate-spin"
-              aria-hidden="true"
-            />
-          )}
-          Send message
-        </Button>
+        <div className='flex justify-end'>
+          <Button className='h-11 px-6 rounded-full w-full md:w-auto' disabled={loading} >
+            {loading && (
+              <Spinner
+                className="mr-2 h-4 w-4 animate-spin"
+                aria-hidden="true"
+              />
+            )}
+            Send message
+          </Button>
+        </div>
     </form>
   </Form>
   )

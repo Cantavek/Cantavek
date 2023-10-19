@@ -8,6 +8,31 @@ export default defineType({
   icon: BookmarkIcon,
   fields: [
     defineField({
+      name: 'read',
+      title: 'Read',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'accepted',
+      title: 'Accepted',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'refused',
+      title: 'Refused',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'request_at',
+      title: 'Request At',
+      type: 'datetime',
+      validation: Rule => Rule.required(),
+      readOnly: true,
+    }),
+    defineField({
       name: 'name',
       title: 'Name',
       type: 'string',

@@ -1,5 +1,6 @@
 import { client } from "@/feature/sanity"
 import { contactSchema } from "@/validations"
+import dayjs from "dayjs"
 import { NextApiRequest, NextApiResponse } from "next"
 
 type Data = {
@@ -20,6 +21,7 @@ export default async function handler(
       await client.create({
         _type: 'booking',
         ...rest,
+        request_at: dayjs().toISOString(),
         type: { _ref: budget, _type: 'reference'},
       })
       return res
