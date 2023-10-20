@@ -22,7 +22,7 @@ const Navbar = () => {
             <Image width={94} height={32} src="/logo.png" priority className="h-8 mr-3" alt="Cantavek Logo"/>
         </Link>
         <div className="flex md:order-2 space-x-3 items-center">
-          {!data?.user ?
+          {!data?.user.active_bundle ?
           <Button size={'lg'} asChild
           className="bg-main rounded-xl shadow-lg shadow-purple-500/50">
             <Link href={'/follow'}>
