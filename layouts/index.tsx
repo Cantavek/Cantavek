@@ -21,7 +21,7 @@ const Layout = ({ children, showVideoButton = false }: PropsWithChildren<{ showV
           <Button 
           className='bg-gradient-to-r from-indigo-500 to-blue-400 rounded-full  p-4 h-auto animate-bounce' 
           asChild>
-            <a target='_blank' href={'https://www.avyga.com'}>
+            <a target='_blank' href={'https://www.avyga.com/orgs/a0eda625-4f60-498a-b362-50b8b5e0076e'}>
               <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" color="#fff"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
             </a>
           </Button>
