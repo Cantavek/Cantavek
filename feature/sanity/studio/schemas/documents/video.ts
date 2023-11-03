@@ -15,6 +15,12 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
+      name: 'description',
+      title: 'Description (a little description of the video (is not requored))',
+      type: 'text',
+      rows: 5,
+    }),
+    defineField({
       name: 'lock',
       title: 'Lock',
       type: 'boolean',

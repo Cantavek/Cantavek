@@ -82,6 +82,7 @@ export type Video = {
   poster: string
   teaser?: string
   video?: string
+  description?: string
 }
 
 export type Page = {
@@ -186,6 +187,7 @@ export const getVideo = (id: string, unlock: boolean) => {
       'poster': poster.asset->url,
       'video': video.asset->url,
       duration,
+      description
     }`, { id })
   }
   return client.fetch<Video>(`*[_type == "video" && _id == $id][0]{

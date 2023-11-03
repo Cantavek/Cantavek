@@ -65,18 +65,21 @@ const Video = ({ unlock, video, otherVideos }: InferGetServerSidePropsType<typeo
   return (
     <Layout>
       <div className='pb-20 pt-20 md:container mx-1.5 md:mx-auto'>
-        <div className='max-w-6xl mx-auto container'>
+        <div className='max-w-6xl mx-2 md:mx-auto md:container'>
           <div>
             <VideoPlayer options={videoJsOptions}/>
-              <div className='pt-4 flex items-center justify-between space-x-1.5'>
-                <h1 className='text-xl font-bold text-gray-800'>{video.title}</h1>
-                <Button className='rounded-full bg-main p-3 h-auto'>
-                  <HeartIcon width={24} height={24}/>
-                </Button>
-              </div>
+            <div className='pt-4  space-x-1.5'>
+              <h1 className='text-3xl md:text-4xl font-bold mb-8 text-slate-700 font-cal'>{video.title}</h1>
+              <p className='text-slate-600 text-lg'>
+                {video?.description}
+              </p>
+              {/* <Button className='rounded-full bg-main p-3 h-auto'>
+                <HeartIcon width={24} height={24}/>
+              </Button> */}
+            </div>
           </div>
 
-          <div className="pt-12">
+          <div className="pt-8">
             <div className='border-t'>
               <h2 className='font-semibold text-xl pt-5'>Others you might like</h2>
               <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 pt-5 pb-10'>

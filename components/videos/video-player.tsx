@@ -41,7 +41,7 @@ const VideoPlayer = ({ options }: { options: any}) => {
 
   return (
     <div data-vjs-player>
-      <div ref={videoRef}/>
+      <div ref={videoRef} className='aspect-video'/>
     </div>
   )
 }
