@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full top-0 left-0 border-b border-gray-200 dark:border-gray-600 z-[200]">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
             <Image width={94} height={32} src="/logo.png" priority className="h-8 mr-3" alt="Cantavek Logo"/>
         </Link>
